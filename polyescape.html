@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PolyEscape — Game UX Design Case Study | Luigi Viggiano</title>
+    <link rel="canonical" href="https://viggiano2411-del.github.io/polyescape.html">
+    <link rel="alternate" hreflang="it" href="https://viggiano2411-del.github.io/polyescape.html">
+    <link rel="alternate" hreflang="en" href="https://viggiano2411-del.github.io/polyescape.html">
+    <link rel="alternate" hreflang="x-default" href="https://viggiano2411-del.github.io/polyescape.html">
+    <meta name="theme-color" content="#0b0a10">
+
+  <meta name="description" content="PolyEscape: a puzzle game designed through four rounds of iterative playtesting. Players learn by playing — no tutorial needed.">
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <script src="js/config.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
+
+    <meta property="og:title" content="PolyEscape — Game UX Case Study | Luigi Viggiano">
+    <meta property="og:description" content="A puzzle game shaped by iterative playtesting. Progressive UX: no tutorial, players learn by playing.">
+    <meta property="og:image" content="https://viggiano2411-del.github.io/polyescape/polyhero.webp">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://viggiano2411-del.github.io/polyescape.html">
+  <link rel="icon" type="image/webp" href="favicon.webp">
+</head>
+<body>
+  
+  
+  <!-- NAV --><nav>
+    <div class="container nav-inner">
+      <a href="index.html#hero" class="nav-logo">Luigi Viggiano</a>
+
+      <!-- desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#progetti" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="index.html#competenze" data-i18n="nav.skills">Competenze</a></li>
+        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+        <li><a href="index.html#contatti" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <!-- desktop CTA -->
+      <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">IT</button>
+      <a href="index.html#contatti" class="btn btn-primary nav-cta"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
+
+      <!-- hamburger — visible on mobile only -->
+      <button
+        class="nav-hamburger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+        id="nav-hamburger-btn"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- mobile menu overlay -->
+  <div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button id="lang-toggle-mobile" class="lang-toggle" aria-label="Switch language" >IT</button>
+    <a href="index.html#progetti" class="nav-mobile-link" data-i18n="nav.portfolio">Portfolio</a>
+    <a href="index.html#competenze" class="nav-mobile-link" data-i18n="nav.skills">Competenze</a>
+    <a href="index.html#about"    class="nav-mobile-link" data-i18n="nav.about">About</a>
+    <a href="index.html#contatti" class="nav-mobile-link" data-i18n="nav.contact">Contact</a>
+    <div class="nav-mobile-cta">
+      <a href="index.html#contatti" class="btn btn-primary"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
+    </div>
+  </div>
+
+<main class="case-study-page">
+      
+      <div class="case-study-inner">
+        <div class="cs-intro cs-reveal">
+          <div class="cs-intro-text">
+            <div class="cs-label-row"><span class="cs-category" data-i18n="cs.poly.category">Product Design · Game</span><span class="cs-dot"></span><span class="cs-year" data-i18n="cs.poly.year">March 2026</span></div>
+          <h1 class="cs-title" data-i18n="cs.poly.title">PolyEscape</h1>
+          <p class="cs-subtitle" data-i18n="cs.poly.subtitle">A puzzle experience shaped through iterative player testing.</p>
+          <div class="cs-role"><span class="tag" data-i18n="cs.poly.tag_0">Product</span><span class="tag" data-i18n="cs.poly.tag_1">UI/UX</span><span class="tag" data-i18n="cs.poly.tag_2">Game Design</span><span class="tag" data-i18n="cs.poly.tag_3">Team Project</span></div>
+          </div>
+          <div class="cs-intro-image">
+            <img src="polyescape/polyhero.webp" alt="Hero Image" loading="lazy" />
+          </div>
+        </div>
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.poly.eyebrow_0">Context</p>
+            <h3 class="cs-chapter-label" data-i18n="cs.poly.label_0">Two extremes, one gap</h3>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_0"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_1"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_2"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_3"></p>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="polyescape/polyscreen1.webp" alt="PolyEscape Context" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.poly.eyebrow_1">Challenge</p>
+            <h3 class="cs-chapter-label" data-i18n="cs.poly.label_1">Players felt lost</h3>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_4"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_5"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_6"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_7"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_8"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_9"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_10"></p>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="polyescape/polyscreen2.webp" alt="PolyEscape Challenge" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.poly.eyebrow_2">Process</p>
+            <h3 class="cs-chapter-label" data-i18n="cs.poly.label_2">Iterating on clarity</h3>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_11"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_12"></p>
+            <div class="cs-point-grid">
+              <div class="cs-point-card cs-reveal"><div class="cs-point-title" data-i18n="cs.poly.point_title_0">Dialogue Integration</div><div class="cs-point-desc" data-i18n="cs.poly.point_desc_0">Light narrative cues replace static instructions.</div></div>
+              <div class="cs-point-card cs-reveal"><div class="cs-point-title" data-i18n="cs.poly.point_title_1">Environmental Landmarks</div><div class="cs-point-desc" data-i18n="cs.poly.point_desc_1">The city itself signals direction and progress.</div></div>
+              <div class="cs-point-card cs-reveal"><div class="cs-point-title" data-i18n="cs.poly.point_title_2">Dynamic Rhythms</div><div class="cs-point-desc" data-i18n="cs.poly.point_desc_2">Pacing adjusts to keep tension calibrated.</div></div>
+              <div class="cs-point-card cs-reveal"><div class="cs-point-title" data-i18n="cs.poly.point_title_3">Emotional Thread</div><div class="cs-point-desc" data-i18n="cs.poly.point_desc_3">A throughline gives every level a reason to matter.</div></div>
+            </div>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="polyescape/polyscreen3.webp" alt="PolyEscape Process" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.poly.eyebrow_3">My Contributions</p>
+            <h3 class="cs-chapter-label" data-i18n="cs.poly.label_3">Shaping the experience layer</h3>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_13"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_14"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_15"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_16"></p>
+            <ul class="cs-icon-list">
+              <li><i class="ph-light ph-images"></i><span data-i18n="cs.poly.li_0"></span></li>
+              <li><i class="ph-light ph-puzzle-piece"></i><span data-i18n="cs.poly.li_1"></span></li>
+              <li><i class="ph-light ph-magnifying-glass"></i><span data-i18n="cs.poly.li_2"></span></li>
+              <li><i class="ph-light ph-layout"></i><span data-i18n="cs.poly.li_3"></span></li>
+              <li><i class="ph-light ph-users"></i><span data-i18n="cs.poly.li_4"></span></li>
+              <li><i class="ph-light ph-tree"></i><span data-i18n="cs.poly.li_5"></span></li>
+            </ul>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="polyescape/polyscreen4.webp" alt="PolyEscape Contributions" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.poly.eyebrow_4">Solution</p>
+            <h3 class="cs-chapter-label" data-i18n="cs.poly.label_4">Guiding without explaining</h3>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_17"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_18"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_19"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_20"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_21"></p>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="polyescape/polyscreen5.webp" alt="PolyEscape Solution" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.poly.eyebrow_5">Outcome</p>
+            <h3 class="cs-chapter-label" data-i18n="cs.poly.label_5">App Store launch</h3>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_22"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_23"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_24"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_25"></p>
+            <p class="cs-chapter-body" data-i18n="cs.poly.body_26"></p>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="polyescape/polyscreen6.webp" alt="PolyEscape Outcome" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-footer cs-reveal">
+          <a href="https://apps.apple.com/it/app/polyescape-find-your-way-out/id6759678668?l=en-GB" class="cs-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span data-i18n="cs.poly.link_text">View on App Store</span></a>
+        </div>
+      </div>
+    </main>
+<script src="js/main.js?v=5" defer></script>
+  <script>
+    // Init scroll reveal immediately since we don't open panels anymore
+    document.addEventListener("DOMContentLoaded", () => {
+      const els = document.querySelectorAll('.cs-reveal, .cs-reveal-left, .cs-reveal-right');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(el => obs.observe(el));
+    });
+  </script>
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand footer-col-1">
+          <a href="index.html" aria-label="Torna alla home" class="footer-logo-link">
+            <span class="footer-logo-text" >LV.</span>
+          </a>
+          <div class="footer-description">
+            <strong>Luigi Viggiano</strong><br>
+            Via Turbolo, 27 | 85040 Viggianello (PZ)<br>
+            C.F.: VGGLGU99S24C002I<br>
+            Email: <a href="mailto:luigi.viggiano@hotmail.it" class="footer-inline-link dynamic-email">luigi.viggiano@hotmail.it</a><br><br>
+            Digital Marketing &amp; UI/UX Designer
+          </div>
+        </div>
+        <div class="footer-col footer-col-2">
+          <h4 data-i18n="footer.explore">ESPLORA</h4>
+          <ul>
+            <li><a href="index.html" data-i18n="footer.home">Home</a></li>
+            <li><a href="index.html#progetti" data-i18n="nav.portfolio">Portfolio</a></li>
+            <li><a href="index.html#competenze" data-i18n="nav.skills">Competenze</a></li>
+            <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+            <li><a href="index.html#contatti" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-3">
+          <h4 data-i18n="footer.contacts">CONTATTI</h4>
+          <ul>
+            <li><a href="https://wa.me/393482681688" target="_blank" rel="noopener noreferrer" class="dynamic-wa-link">WhatsApp</a></li>
+            <li><a href="mailto:luigi.viggiano@hotmail.it" class="dynamic-email">Email</a></li>
+          </ul>
+          
+        
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/luigi-viggiano" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ph-light ph-linkedin-logo"></i></a>
+            <a href="https://www.behance.net/luigiviggiano2" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ph-light ph-behance-logo"></i></a>
+          </div>
+        </div>
+        <div class="footer-col footer-col-4">
+          <h4 data-i18n="footer.legal">LEGALE</h4>
+          <ul>
+            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+            <li><a href="cookie.html" data-i18n="footer.cookie">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <p data-i18n="footer.copy">© 2026 Luigi Viggiano. Tutti i diritti riservati.</p>
+        <p class="footer-legal-text"><span class="dynamic-address">Via Turbolo, 27, 85040 Viggianello (PZ)</span> · Italia</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

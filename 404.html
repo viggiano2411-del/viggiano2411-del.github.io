@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Pagina non trovata | Luigi Viggiano</title>
+  <meta name="description" content="Ops! La pagina che stai cercando non esiste.">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
+  <meta name="theme-color" content="#0b0a10">
+  <link rel="icon" type="image/webp" href="favicon.webp">
+</head>
+<body class="theme-dark">
+  <!-- ── CURSOR ── -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-outline" id="cursor-outline"></div>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand magnetic">LV.</a>
+      <div class="nav-links">
+        <a href="index.html#about" class="nav-link magnetic" data-i18n="nav.about">About</a>
+        <a href="index.html#contatti" class="nav-link magnetic" data-i18n="nav.contact">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <button id="lang-toggle" class="lang-toggle magnetic">EN</button>
+        <a href="index.html#contatti" class="btn btn-primary magnetic"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><i class="ph-light ph-list"></i></button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile" id="nav-mobile">
+    <button class="nav-mobile-close" id="nav-mobile-close" aria-label="Close menu"><i class="ph-light ph-x"></i></button>
+    <a href="index.html#about" class="nav-mobile-link" data-i18n="nav.about">About</a>
+    <a href="index.html#contatti" class="nav-mobile-link" data-i18n="nav.contact">Contact</a>
+    <div class="nav-mobile-cta">
+      <a href="index.html#contatti" class="btn btn-primary"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
+    </div>
+  </div>
+
+  <main style="min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 20px;">
+    <div class="container">
+      <h1 style="font-size: clamp(4rem, 10vw, 8rem); margin-bottom: 24px; color: var(--accent2); font-family: var(--font-head); font-weight: 800;">404</h1>
+      <h2 style="font-size: 2rem; margin-bottom: 16px; color: var(--fg);">Ops! Sembra che ti sia perso.</h2>
+      <p style="color: var(--muted); margin-bottom: 40px; font-size: 1.1rem;">La pagina che stavi cercando non esiste o è stata spostata.</p>
+      <a href="index.html" class="btn btn-primary">Torna alla Home <i class="ph-light ph-house" style="font-size: 1.2em; vertical-align: middle; margin-left: 0.3em;"></i></a>
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand footer-col-1">
+          <a href="index.html" aria-label="Torna alla home" class="footer-logo-link">
+            <span class="footer-logo-text" >LV.</span>
+          </a>
+          <div class="footer-description">
+            <strong>Luigi Viggiano</strong><br>
+            Via Turbolo, 27 | 85040 Viggianello (PZ)<br>
+            C.F.: VGGLGU99S24C002I<br>
+            Email: <a href="mailto:luigi.viggiano@hotmail.it" class="footer-inline-link dynamic-email">luigi.viggiano@hotmail.it</a><br><br>
+            Digital Marketing &amp; UI/UX Designer
+          </div>
+        </div>
+        <div class="footer-col footer-col-2">
+          <h4 data-i18n="footer.explore">ESPLORA</h4>
+          <ul>
+            <li><a href="index.html" data-i18n="footer.home">Home</a></li>
+            <li><a href="index.html#progetti" data-i18n="nav.portfolio">Portfolio</a></li>
+            <li><a href="index.html#competenze" data-i18n="nav.skills">Competenze</a></li>
+            <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+            <li><a href="index.html#contatti" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-3">
+          <h4 data-i18n="footer.contacts">CONTATTI</h4>
+          <ul>
+            <li><a href="https://wa.me/393482681688" target="_blank" rel="noopener noreferrer" class="dynamic-wa-link">WhatsApp</a></li>
+            <li><a href="mailto:luigi.viggiano@hotmail.it" class="dynamic-email">Email</a></li>
+          </ul>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/luigi-viggiano" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ph-light ph-linkedin-logo"></i></a>
+            <a href="https://www.behance.net/luigiviggiano2" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ph-light ph-behance-logo"></i></a>
+          </div>
+        </div>
+        <div class="footer-col footer-col-4">
+          <h4 data-i18n="footer.legal">LEGALE</h4>
+          <ul>
+            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+            <li><a href="cookie.html" data-i18n="footer.cookie">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <p data-i18n="footer.copy">© 2026 Luigi Viggiano. Tutti i diritti riservati.</p>
+        <p class="footer-legal-text"><span class="dynamic-address">Via Turbolo, 27, 85040 Viggianello (PZ)</span> · Italia</p>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/main.js?v=5" defer></script>
+</body>
+</html>

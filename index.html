@@ -4,933 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luigi Viggiano — Digital Marketing & UI/UX Design</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      /* colors */
-      --bg:       #0a0a0f;
-      --surface:  #111118;
-      --surface2: #18181f;
-      --border:   rgba(255,255,255,.07);
-      --accent:   #7c3aed;
-      --accent2:  #a855f7;
-      --glow:     rgba(124,58,237,.3);
-      --text:     #e8e8f0;
-      --muted:    #9494b0;
-
-      /* typography */
-      --font-head: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-      --tracking-wide: .08em;  /* labels, tags, buttons */
-      --tracking-tight: -.03em; /* headings */
-
-      /* spacing scale: 4 8 16 24 32 48 64 96 */
-      --s1: 4px;
-      --s2: 8px;
-      --s3: 16px;
-      --s4: 24px;
-      --s5: 32px;
-      --s6: 48px;
-      --s7: 64px;
-      --s8: 96px;
-
-      /* shape */
-      --radius:    16px;
-      --radius-sm: 8px;
-
-      /* z-index layers */
-      --z-base:    1;
-      --z-nav:     100;
-      --z-panel:   200;
-      --z-close:   210;
-    }
-
-    html { scroll-behavior: smooth; font-size: 20px; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-
-    /* layout */
-    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 var(--s5); }
-    .section    { padding: var(--s8) 0; }
-
-    /* tag pill */
-    .tag {
-      display: inline-block;
-      font-size: 0.67rem;
-      font-weight: 500;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      padding: var(--s1) var(--s2);
-      border-radius: var(--s1);
-      background: rgba(124,58,237,.15);
-      color: var(--accent2);
-      border: 1px solid rgba(168,85,247,.2);
-    }
-
-    /* buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s2);
-      font-family: var(--font-body);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      padding: var(--s3) var(--s5);
-      border-radius: var(--radius-sm);
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: box-shadow .25s ease, transform .25s ease, background .25s ease;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      box-shadow: 0 4px 24px var(--glow);
-    }
-    .btn-primary:hover {
-      box-shadow: 0 6px 40px var(--glow);
-      transform: translateY(-2px);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--accent2);
-      border: 1px solid rgba(168,85,247,.35);
-    }
-    .btn-ghost:hover {
-      background: rgba(124,58,237,.1);
-      border-color: var(--accent2);
-    }
-
-    /* fade-up animation */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { opacity: 0; animation: fadeUp .6s ease forwards; }
-    .delay-1 { animation-delay: .1s; }
-    .delay-2 { animation-delay: .2s; }
-    .delay-3 { animation-delay: .3s; }
-
-
-    /* ── nav ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: var(--z-nav);
-      padding: var(--s3) 0;
-      background: rgba(10,10,15,.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--s4);
-    }
-    .nav-logo {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1rem;
-      color: #fff;
-      text-decoration: none;
-      letter-spacing: var(--tracking-tight);
-      flex-shrink: 0;
-      text-transform: uppercase;
-    }
-
-    /* desktop links */
-    .nav-links {
-      display: flex;
-      gap: var(--s5);
-      list-style: none;
-      margin: 0 auto;
-    }
-    .nav-links a {
-      font-size: 0.89rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: #fff; }
-
-    /* nav CTA */
-    .nav-cta { flex-shrink: 0; }
-
-    /* ── hamburger button ── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      width: 44px;
-      height: 44px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      border-radius: var(--radius-sm);
-      transition: background .2s;
-      flex-shrink: 0;
-    }
-    .nav-hamburger:hover { background: rgba(255,255,255,.06); }
-    .nav-hamburger:focus-visible {
-      outline: 2px solid var(--accent2);
-      outline-offset: 2px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: #fff;
-      border-radius: 2px;
-      transition: transform .25s cubic-bezier(.4,0,.2,1),
-                  opacity  .25s cubic-bezier(.4,0,.2,1);
-      transform-origin: center;
-    }
-    /* active state: top → /, middle → hidden, bottom → \ */
-    .nav-hamburger[aria-expanded="true"] span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .nav-hamburger[aria-expanded="true"] span:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    .nav-hamburger[aria-expanded="true"] span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    /* ── mobile menu overlay ── */
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      inset: 0;
-      top: 57px; /* nav height */
-      background: rgba(6,6,10,.97);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      z-index: calc(var(--z-nav) - 1);
-      padding: var(--s6) var(--s4);
-      flex-direction: column;
-      gap: var(--s2);
-      overflow-y: auto;
-    }
-    .nav-mobile.open {
-      display: flex;
-      animation: mobileMenuIn .25s cubic-bezier(.22,1,.36,1) forwards;
-    }
-    @keyframes mobileMenuIn {
-      from { opacity: 0; transform: translateY(-8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    /* nav links — solo i link di navigazione, NON il bottone CTA */
-    .nav-mobile-link {
-      display: block;
-      font-size: 0.89rem;
-      color: var(--muted);
-      text-decoration: none;
-      padding: var(--s3) 0;
-      border-bottom: 1px solid var(--border);
-      transition: color .2s;
-    }
-    .nav-mobile-link:last-of-type { border-bottom: none; }
-    .nav-mobile-link:hover { color: #fff; }
-
-    /* CTA — stesso .btn.btn-primary della navbar desktop, full-width */
-    .nav-mobile .nav-mobile-cta {
-      margin-top: var(--s4);
-    }
-    .nav-mobile .nav-mobile-cta .btn {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-    }
-
-
-    /* hero */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding-top: 80px;
-    }
-    .hero-bg {
-      position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 80% 55% at 50% -5%, rgba(124,58,237,.28) 0%, transparent 65%),
-        radial-gradient(ellipse 45% 35% at 80% 65%, rgba(168,85,247,.1) 0%, transparent 60%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 80%);
-    }
-    .hero-content {
-      position: relative;
-      z-index: var(--z-base);
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .hero-eyebrow {
-      font-size: 0.67rem;
-      font-weight: 500;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: var(--s5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--s3);
-    }
-    .hero-eyebrow span { display: inline-block; width: 32px; height: 1px; background: var(--accent2); opacity: .4; }
-    .hero-title {
-      font-family: var(--font-head);
-      font-size: clamp(2.8rem, 7vw, 5.2rem);
-      font-weight: 800;
-      line-height: 1.02;
-      letter-spacing: var(--tracking-tight);
-      color: #fff;
-      margin-bottom: var(--s5);
-      text-transform: uppercase;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-title span {
-      /* Correzione ottica: bilancia il peso della 'L' spostando LUIGI leggermente a destra */
-      transform: translateX(1.5%);
-    }
-    .hero-title em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--accent), var(--accent2) 55%, #e879f9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto var(--s6);
-      line-height: 1.75;
-    }
-    .hero-sub strong {
-      font-size: 1.11rem;
-      font-weight: 600;
-      color: #fff;
-      display: block;
-      margin-bottom: var(--s2);
-    }
-    .hero-cta { display: flex; gap: var(--s3); justify-content: center; flex-wrap: wrap; }
-    .hero-scroll {
-      position: absolute;
-      bottom: var(--s5);
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--s2);
-      font-size: 0.56rem;
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--accent2), transparent);
-      animation: scrollPulse 2s ease infinite;
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: .25; transform: scaleY(.8); }
-      50%       { opacity: .8;  transform: scaleY(1); }
-    }
-
-
-    /* section headers */
-    .section-header  { text-align: center; margin-bottom: var(--s7); }
-    .section-label   { font-size: 0.67rem; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent2); font-weight: 600; margin-bottom: var(--s2); }
-    .section-title   { font-family: var(--font-body); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: var(--tracking-tight); color: #fff; line-height: 1.1; margin-bottom: var(--s2); }
-    .section-desc    { font-size: 0.89rem; color: var(--muted); max-width: 460px; margin: 0 auto; }
-
-
-    /* ── filtri progetti ── */
-    .project-filters {
-      display: flex; gap: var(--s2); justify-content: center;
-      margin-bottom: var(--s4);
-      flex-wrap: wrap; padding: 0 var(--s4);
-    }
-    .filter-btn {
-      background: transparent; border: 1px solid var(--border);
-      color: var(--muted); border-radius: 20px;
-      padding: 6px 14px; font-size: 0.78rem; font-weight: 600;
-      cursor: pointer; transition: all .3s ease;
-    }
-    .filter-btn:hover { 
-      color: var(--fg); 
-      border-color: var(--accent2); 
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.4); 
-    }
-    .filter-btn.active { 
-      background: var(--accent); 
-      color: #fff; 
-      border-color: var(--accent); 
-      box-shadow: 0 0 15px rgba(124, 58, 237, 0.5); 
-    }
-    .project-card.hidden { display: none !important; }
-
-    /* ── progetti slider ── */
-    #progetti .section-header { margin-bottom: var(--s5); }
-
-    .projects-slider-wrap {
-      position: relative;
-      padding: var(--s3) 0 var(--s5);
-    }
-
-    /* frecce */
-    .projects-arrow {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      z-index: 10;
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: rgba(10,10,15,.85);
-      border: 1px solid rgba(255,255,255,.14);
-      color: #fff; font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background .2s, transform .2s, opacity .2s;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      user-select: none;
-    }
-    .projects-arrow:hover { background: rgba(124,58,237,.5); transform: translateY(-50%) scale(1.08); }
-    .projects-arrow:disabled { opacity: .25; pointer-events: none; }
-    .projects-arrow--prev { left: var(--s3); }
-    .projects-arrow--next { right: var(--s3); }
-
-    /* track */
-    .projects-slider-track {
-      display: flex;
-      gap: var(--s4);
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding: var(--s2) var(--s6);
-    }
-    .projects-slider-track::-webkit-scrollbar { display: none; }
-
-    /* dots */
-    .projects-dots {
-      display: flex;
-      justify-content: center;
-      gap: var(--s2);
-      margin-top: var(--s4);
-    }
-    .projects-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.2);
-      border: none; cursor: pointer; padding: 0;
-      transition: background .2s, transform .2s;
-    }
-    .projects-dot.active {
-      background: var(--accent2);
-      transform: scale(1.3);
-    }
-
-
-    /* ── project card ── */
-    .project-card {
-      flex: 0 0 300px;
-      scroll-snap-align: start;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-      user-select: none;
-      cursor: pointer;
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(124,58,237,.4);
-      box-shadow: 0 16px 48px rgba(0,0,0,.5);
-    }
-
-    .project-thumb {
-      width: 100%;
-      aspect-ratio: 16/9;
-      position: relative;
-      overflow: hidden;
-      background: var(--surface2);
-      flex-shrink: 0;
-    }
-    .project-thumb img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .4s ease;
-    }
-    .project-card:hover .project-thumb img { transform: scale(1.04); }
-    .project-thumb::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, rgba(10,10,15,.6));
-    }
-    .project-thumb--game     { background: linear-gradient(160deg, #12123a, #2d1b69); }
-    .project-thumb--energy   { background: linear-gradient(140deg, #0b2218, #1e5c38); }
-    .project-thumb--nature   { background: linear-gradient(110deg, #0d2b1f, #2a6b4a); }
-    .project-thumb--social   { background: linear-gradient(150deg, #1a1040, #3b1575); }
-    .project-thumb--night    { background: linear-gradient(125deg, #08080f, #1c1050); }
-    .project-thumb--flame    { background: linear-gradient(145deg, #0a1a2e, #1a3a5c); }
-    .project-thumb--research { background: linear-gradient(135deg, #0f0a2a, #1e0f4a); }
-    .project-thumb--memory   { background: linear-gradient(150deg, #2a1640, #5c1f4a); }
-    .project-thumb--cards    { background: linear-gradient(160deg, #161038, #3a1a5e); }
-    .project-thumb--signsync { background: linear-gradient(155deg, #14123a, #3a2a6e); }
-    .project-thumb--tvtime   { background: linear-gradient(140deg, #170f35, #4c1d6e); }
-    .thumb-icon { width: 48px; height: 48px; color: rgba(168,85,247,.45); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
-
-    .project-info  { padding: var(--s3) var(--s4) var(--s4); display: flex; flex-direction: column; gap: 8px; }
-    .project-category { font-size: 0.62rem; font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent2); order: 0; }
-    .project-tags  { display: flex; gap: var(--s2); flex-wrap: wrap; order: 3; margin-top: 4px; }
-    .project-name  { font-size: 0.89rem; font-weight: 700; color: #fff; line-height: 1.2; order: 1; }
-    .project-desc  { font-size: 0.72rem; color: var(--muted); line-height: 1.55; order: 2; }
-
-
-    /* ── case study panel — scrollytelling layout ── */
-    body.panel-open { overflow: hidden; position: fixed; width: 100%; }
-
-    .case-study-panel {
-      display: none; position: fixed; inset: 0;
-      background: #06060a;
-      z-index: var(--z-panel);
-      overflow-y: auto; -webkit-overflow-scrolling: touch;
-    }
-    .case-study-panel.open {
-      display: block;
-      animation: panelIn .3s cubic-bezier(.22,1,.36,1) forwards;
-    }
-    @keyframes panelIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .cs-close-btn {
-      position: fixed; top: var(--s4); right: var(--s4);
-      z-index: var(--z-close);
-      width: 40px; height: 40px; border-radius: 50%;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
-      color: #fff; font-size: 0.89rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background .2s, transform .2s;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    }
-    .cs-close-btn:hover { background: rgba(255,255,255,.18); transform: scale(1.08); }
-
-    /* scroll-reveal */
-    .cs-reveal {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
-    }
-    .cs-reveal.visible { opacity: 1; transform: translateY(0); }
-    .cs-reveal-left  { opacity: 0; transform: translateX(-32px); transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1); }
-    .cs-reveal-right { opacity: 0; transform: translateX(32px);  transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1); }
-    .cs-reveal-left.visible, .cs-reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-    .case-study-inner { max-width: 800px; margin: 0 auto; padding: var(--s7) var(--s4) 120px; }
-
-    /* hero */
-    .cs-hero {
-      position: relative; width: 100%;
-      border-radius: var(--radius); overflow: hidden;
-      margin-bottom: var(--s6); background: var(--surface);
-      aspect-ratio: 16/9;
-    }
-    .cs-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .cs-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(6,6,10,.85) 0%, transparent 55%);
-      display: flex; align-items: flex-end; padding: var(--s5);
-    }
-    .cs-hero-tag {
-      font-size: 0.67rem; font-weight: 700;
-      letter-spacing: var(--tracking-wide); text-transform: uppercase;
-      color: var(--accent2);
-      background: rgba(124,58,237,.2);
-      border: 1px solid rgba(168,85,247,.3);
-      padding: 4px 10px; border-radius: 4px;
-    }
-
-    /* header */
-    .cs-header { margin-bottom: var(--s7); }
-    .cs-label-row { display: flex; align-items: center; gap: var(--s2); margin-bottom: var(--s3); }
-    .cs-category { font-size: 0.67rem; font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent2); }
-    .cs-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
-    .cs-year { font-size: 0.67rem; color: var(--muted); }
-    .cs-title {
-      font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 700; color: #fff;
-      letter-spacing: var(--tracking-tight); line-height: 1.0; margin-bottom: var(--s4);
-    }
-    .cs-subtitle { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 600px; margin-bottom: var(--s4); }
-    .cs-role { display: flex; flex-wrap: wrap; gap: var(--s2); }
-
-    /* ── capitoli impilati: immagine sopra, testo sotto ── */
-    .cs-chapter {
-      display: flex;
-      flex-direction: column;
-      gap: var(--s5);
-      padding: var(--s7) 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .cs-chapter:last-of-type { border-bottom: none; }
-
-    .cs-chapter-text   { order: 2; }
-    .cs-chapter-visual { order: 1; }
-
-    /* rimuovo le regole pari/dispari — non più affiancati */
-
-    .cs-chapter-num {
-      font-size: 0.67rem; font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--accent2); margin-bottom: var(--s2);
-    }
-    /* slide eyebrow — replaces numbered chapters (01, 02...) with a named label */
-    .cs-chapter-eyebrow {
-      font-family: var(--font-body);
-      font-size: 0.67rem; font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--accent2); margin-bottom: var(--s2);
-    }
-    .cs-chapter-label {
-      font-family: var(--font-head);
-      font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; color: #fff;
-      line-height: 1.12; margin-bottom: var(--s3);
-      letter-spacing: var(--tracking-tight);
-      text-transform: uppercase;
-    }
-    .cs-chapter-body { font-size: 0.83rem; color: var(--muted); line-height: 1.85; }
-    .cs-chapter-body + .cs-chapter-body { margin-top: var(--s3); }
-    .cs-chapter-note {
-      margin-top: var(--s4); font-size: 0.72rem;
-      color: var(--accent2); font-style: italic; opacity: .8;
-    }
-
-    .cs-chapter-img {
-      width: 100%; border-radius: var(--radius-sm);
-      overflow: hidden; background: var(--surface2);
-      border: 1px solid var(--border);
-    }
-    .cs-chapter-img img { width: 100%; height: auto; display: block; }
-    .cs-chapter-caption {
-      padding: var(--s2) var(--s3);
-      font-size: 0.72rem; color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
-    .cs-chapter-placeholder {
-      width: 100%; aspect-ratio: 4/3;
-      border-radius: var(--radius-sm);
-      border: 1px dashed rgba(168,85,247,.2);
-      background: rgba(124,58,237,.04);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: var(--s2); color: var(--muted);
-      font-size: 0.67rem; text-align: center; padding: var(--s4);
-    }
-    .cs-chapter-placeholder svg { opacity: .3; }
-
-    /* stats */
-    .cs-stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: var(--s3); margin: var(--s7) 0;
-    }
-    .cs-stat {
-      background: rgba(124,58,237,.07);
-      border: 1px solid rgba(168,85,247,.12);
-      border-radius: var(--radius-sm);
-      padding: var(--s4) var(--s3); text-align: center;
-    }
-    .cs-stat-value { font-size: 1.56rem; font-weight: 700; color: var(--accent2); line-height: 1; margin-bottom: 4px; }
-    .cs-stat-label { font-size: 0.72rem; color: var(--muted); }
-
-    /* cta */
-    .cs-footer { padding-top: var(--s6); border-top: 1px solid var(--border); }
-    .cs-link {
-      display: inline-flex; align-items: center; gap: var(--s2);
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: var(--tracking-wide); text-transform: uppercase;
-      color: var(--accent2); text-decoration: none;
-      border: 1px solid rgba(168,85,247,.25);
-      border-radius: var(--radius-sm);
-      padding: var(--s3) var(--s4);
-      transition: background .2s, border-color .2s;
-    }
-    .cs-link:hover { background: rgba(124,58,237,.1); border-color: var(--accent2); }
-    .cs-link svg { width: 13px; height: 13px; }
-
-    /* ── point grid — for concept pillars, process steps, solution principles ── */
-    .cs-point-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: var(--s3);
-      margin-top: var(--s4);
-    }
-    .cs-point-grid + .cs-point-grid { margin-top: var(--s3); }
-    .cs-point-card {
-      background: rgba(124,58,237,.05);
-      border: 1px solid rgba(168,85,247,.14);
-      border-radius: var(--radius-sm);
-      padding: var(--s4);
-      transition: border-color .25s ease, transform .25s ease;
-    }
-    .cs-point-title {
-      font-size: 0.78rem; font-weight: 700; color: #fff;
-      letter-spacing: var(--tracking-tight); margin-bottom: 6px;
-    }
-    .cs-point-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.6; }
-
-    /* ── gallery grid ── */
-    .cs-gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: var(--s3);
-      margin-top: var(--s4);
-    }
-    .cs-gallery-grid .cs-chapter-img,
-    .cs-gallery-grid .cs-chapter-placeholder { height: 100%; }
-    .cs-gallery-grid .cs-chapter-placeholder { aspect-ratio: 1/1; }
-
-    /* ── next project banner ── */
-    .cs-next {
-      margin-top: var(--s7);
-      padding: var(--s6) var(--s5);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(124,58,237,.1), rgba(168,85,247,.03));
-      display: flex; align-items: center; justify-content: space-between;
-      gap: var(--s4); cursor: pointer;
-      transition: border-color .3s ease, transform .3s ease, background .3s ease;
-    }
-    .cs-next:hover { border-color: rgba(168,85,247,.4); transform: translateY(-2px); background: linear-gradient(135deg, rgba(124,58,237,.16), rgba(168,85,247,.05)); }
-    .cs-next-label {
-      font-size: 0.67rem; font-weight: 700; letter-spacing: var(--tracking-wide);
-      text-transform: uppercase; color: var(--accent2); margin-bottom: 6px;
-    }
-    .cs-next-title {
-      font-family: var(--font-head); font-size: clamp(1.4rem, 4vw, 2.1rem);
-      font-weight: 800; color: #fff; letter-spacing: var(--tracking-tight);
-      text-transform: uppercase;
-    }
-    .cs-next-arrow {
-      flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
-      border: 1px solid rgba(168,85,247,.3);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--accent2); transition: transform .3s ease, background .3s ease;
-    }
-    .cs-next:hover .cs-next-arrow { transform: translateX(6px); background: rgba(124,58,237,.15); }
-
-    /* mobile: padding ridotto */
-    @media (max-width: 640px) {
-      .cs-chapter { gap: var(--s4); padding: var(--s5) 0; }
-    }
-
-
-    /* services */
-    #servizi { background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(124,58,237,.05), transparent 70%); }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); }
-
-    .service-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: var(--s5);
-      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      opacity: 0;
-      transition: opacity .3s ease;
-    }
-
-    .service-icon {
-      width: 40px; height: 40px;
-      background: rgba(124,58,237,.12);
-      border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: var(--s3);
-      font-size: 1rem;
-    }
-    .service-name { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: var(--s2); }
-    .service-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; margin-bottom: var(--s4); }
-    .service-cta  { font-size: 0.78rem; font-weight: 600; color: var(--accent2); text-decoration: none; display: inline-flex; align-items: center; gap: var(--s2); transition: gap .2s ease; }
-    .service-cta:hover { gap: var(--s3); }
-
-
-    /* about */
-    #about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--s7); align-items: center; }
-    .about-visual {
-      aspect-ratio: 4/5;
-      background: linear-gradient(150deg, var(--surface2), #1a1a28);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .about-visual::before {
-      content: '';
-      position: absolute; inset: -32px;
-      background: radial-gradient(circle at 50% 50%, rgba(124,58,237,.1), transparent 65%);
-    }
-    .about-bio { color: var(--muted); font-size: 0.89rem; line-height: 1.8; }
-    .about-bio p + p { margin-top: var(--s3); }
-
-    .about-skills { margin-top: var(--s5); display: flex; flex-direction: column; gap: var(--s4); }
-    .about-skill-group { display: flex; flex-direction: column; gap: var(--s2); }
-    .about-skill-label { font-size: 0.67rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent2); }
-    .about-skill-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
-
-    /* ── simplified about layout: image one side, text the other ── */
-    .about-grid--simple { display: grid; grid-template-columns: auto 1fr; gap: var(--s7); align-items: flex-start; max-width: 880px; margin: 0 auto; }
-    .about-visual--simple { width: 260px; height: auto; flex-shrink: 0; overflow: visible; border-radius: 0; background: transparent; border: none; }
-    .about-visual--simple::before { display: none; }
-    .about-photo { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: inherit; position: relative; z-index: 1; }
-    .about-initials { font-family: var(--font-head); font-size: 2.2rem; font-weight: 800; color: var(--accent2); letter-spacing: var(--tracking-tight); text-transform: uppercase; }
-    .about-text--simple { width: 100%; text-align: left; }
-    .about-text--simple .about-bio { text-align: left; max-width: 520px; margin: 0; }
-    .about-skills--simple { align-items: flex-start; }
-    .about-skills--simple .about-skill-group { align-items: flex-start; }
-    .about-skills--simple .about-skill-tags { justify-content: flex-start; }
-    .about-cta--row { display: flex; gap: var(--s3); justify-content: flex-start; flex-wrap: wrap; }
-
-
-    /* contact */
-    #contatti { text-align: center; }
-    .contact-box { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); max-width: 640px; margin: 0 auto; }
-    .contact-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: var(--s4);
-      transition: border-color .3s ease, transform .3s ease;
-    }
-    .contact-icon  { font-size: 1.33rem; margin-bottom: var(--s3); }
-    .contact-label { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: var(--s2); }
-    .contact-hint  { font-size: 0.78rem; color: var(--muted); margin-bottom: var(--s3); }
-    .contact-link  { color: var(--accent2); font-size: 0.83rem; text-decoration: none; font-weight: 500; transition: color .2s ease; }
-    .contact-link:hover { color: #fff; }
-
-
-    /* about overrides */
-    .section-header--left { text-align: left; margin-bottom: var(--s4); }
-    .about-cta { margin-top: var(--s5); }
-
-    /* footer */    footer { border-top: 1px solid var(--border); padding: var(--s5) 0; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
-    .footer-brand { font-family: var(--font-head); font-size: 0.89rem; font-weight: 700; color: var(--accent2); text-transform: uppercase; }
-    .footer-copy  { font-size: 0.72rem; color: var(--muted); }
-
-
-    /* ── responsive ── */
-
-    /* ── tablet: 768–1024px ── */
-    @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .cs-chapter { gap: var(--s5); }
-    }
-
-    /* ── tablet/mobile: ≤768px — show hamburger, hide desktop nav ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-cta   { display: none; }
-      .nav-hamburger { display: flex; }
-
-      .about-grid { grid-template-columns: 1fr; gap: var(--s5); }
-      .about-grid--simple { grid-template-columns: 1fr; gap: var(--s5); text-align: center; justify-items: center; }
-      .about-grid--simple .about-text--simple { text-align: center; }
-      .about-grid--simple .about-text--simple .about-bio { text-align: left; margin: 0 auto; }
-      .about-grid--simple .about-skills--simple { align-items: center; }
-      .about-grid--simple .about-skills--simple .about-skill-group { align-items: center; }
-      .about-grid--simple .about-skills--simple .about-skill-tags { justify-content: center; }
-      .about-grid--simple .about-cta--row { justify-content: center; }
-
-      .contact-box { grid-template-columns: 1fr; }
-
-      /* case study chapters già in colonna by default */
-    }
-
-    /* ── mobile: ≤480px ── */
-    @media (max-width: 480px) {
-      :root { --s8: 56px; --s7: 48px; }
-
-      .container { padding: 0 var(--s3); }
-
-      .hero-title { font-size: 2rem; }
-      .hero-sub   { font-size: 0.83rem; }
-      .hero-cta   { flex-direction: column; align-items: center; }
-
-      .services-grid { grid-template-columns: 1fr; }
-
-      .project-card { flex: 0 0 calc(100vw - 48px); }
-
-      /* case study: tighter padding on small screens */
-      .case-study-inner { padding: var(--s6) var(--s3) 80px; }
-      .cs-title   { font-size: 1.8rem; }
-      .cs-subtitle { font-size: 0.83rem; }
-      .cs-chapter-label { font-size: 1rem; }
-      .cs-chapter-body  { font-size: 0.78rem; }
-      .cs-hero    { aspect-ratio: 4/3; }
-      .cs-stats-row { grid-template-columns: 1fr 1fr; }
-      .cs-stat-value { font-size: 1.22rem; }
-
-      .cs-point-grid { grid-template-columns: 1fr; }
-      .cs-gallery-grid { grid-template-columns: 1fr; }
-      .cs-next { flex-direction: column; align-items: flex-start; gap: var(--s3); padding: var(--s5) var(--s4); }
-      .cs-next-arrow { align-self: flex-end; }
-
-      .footer-inner { flex-direction: column; gap: var(--s2); text-align: center; }
-
-      /* close button repositioned slightly for small screens */
-      .cs-close-btn { top: var(--s3); right: var(--s3); width: 36px; height: 36px; }
-    }
-  </style>
+    <meta name="description" content="Luigi Viggiano — Digital Marketing & UI/UX Designer. Portfolio, case study e servizi.">
+    <meta property="og:title" content="Luigi Viggiano — Digital Marketing & UI/UX Designer">
+    <meta property="og:description" content="Portfolio of Luigi Viggiano — UI/UX Designer & Digital Marketer. Case studies in product design, branding and UX research.">
+    <meta property="og:image" content="https://viggiano2411-del.github.io/profile/profile-photo.webp">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://viggiano2411-del.github.io/">
+
+    <link rel="canonical" href="https://viggiano2411-del.github.io/">
+    <link rel="alternate" hreflang="it" href="https://viggiano2411-del.github.io/index.html">
+    <link rel="alternate" hreflang="en" href="https://viggiano2411-del.github.io/index.html">
+    <link rel="alternate" hreflang="x-default" href="https://viggiano2411-del.github.io/index.html">
+    <meta name="theme-color" content="#0b0a10">
+
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
+  <link rel="icon" type="image/webp" href="favicon.webp">
 </head>
 <body>
 
@@ -941,14 +30,15 @@
 
       <!-- desktop links -->
       <ul class="nav-links" role="list">
-        <li><a href="#progetti">Portfolio</a></li>
-        <li><a href="#servizi">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contatti">Contact</a></li>
+        <li><a href="#progetti" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="#competenze" data-i18n="nav.skills">Competenze</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#contatti" data-i18n="nav.contact">Contact</a></li>
       </ul>
 
       <!-- desktop CTA -->
-      <a href="#contatti" class="btn btn-primary nav-cta">Let's Talk →</a>
+      <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">IT</button>
+      <a href="#contatti" class="btn btn-primary nav-cta"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
 
       <!-- hamburger — visible on mobile only -->
       <button
@@ -967,12 +57,13 @@
 
   <!-- mobile menu overlay -->
   <div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
-    <a href="#progetti" class="nav-mobile-link">Portfolio</a>
-    <a href="#servizi"  class="nav-mobile-link">Services</a>
-    <a href="#about"    class="nav-mobile-link">About</a>
-    <a href="#contatti" class="nav-mobile-link">Contact</a>
+    <button id="lang-toggle-mobile" class="lang-toggle" aria-label="Switch language" >IT</button>
+    <a href="#progetti" class="nav-mobile-link" data-i18n="nav.portfolio">Portfolio</a>
+    <a href="#competenze" class="nav-mobile-link" data-i18n="nav.skills">Competenze</a>
+    <a href="#about"    class="nav-mobile-link" data-i18n="nav.about">About</a>
+    <a href="#contatti" class="nav-mobile-link" data-i18n="nav.contact">Contact</a>
     <div class="nav-mobile-cta">
-      <a href="#contatti" class="btn btn-primary">Let's Talk →</a>
+      <a href="#contatti" class="btn btn-primary"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
     </div>
   </div>
 
@@ -982,12 +73,12 @@
     <div class="hero-grid"></div>
     <div class="container">
       <div class="hero-content">
-        <p class="hero-eyebrow fade-up"><span></span>Available for new projects<span></span></p>
+        <p class="hero-eyebrow fade-up"><span class="line"></span><span data-i18n="hero.eyebrow">Available for new projects</span><span class="line"></span></p>
         <h1 class="hero-title fade-up delay-1"><span>Luigi</span><em>Viggiano</em></h1>
-        <p class="hero-sub fade-up delay-2"><strong>Digital Marketing &amp; UI/UX Design.</strong>I design digital experiences that combine creativity, strategy, research, and technology to create meaningful connections.</p>
+        <p class="hero-sub fade-up delay-2"><strong data-i18n="hero.role">Digital Marketing &amp; UI/UX Design.</strong><span data-i18n="hero.desc">I design digital experiences that combine creativity, strategy, research, and technology to create meaningful connections.</span></p>
         <div class="hero-cta fade-up delay-3">
-          <a href="#progetti" class="btn btn-primary">View My Projects</a>
-          <a href="#contatti" class="btn btn-ghost">Get in Touch</a>
+          <a href="#progetti" class="btn btn-primary" data-i18n="hero.cta1">View My Projects</a>
+          <a href="#contatti" class="btn btn-ghost" data-i18n="hero.cta2">Get in Touch</a>
         </div>
       </div>
     </div>
@@ -998,999 +89,178 @@
   <section id="progetti" class="section">
     <div class="container">
       <div class="section-header">
-        <p class="section-label">Portfolio</p>
-        <h2 class="section-title">My Latest Projects</h2>
-        <p class="section-desc">Click a card to explore the full case study</p>
+        <p class="section-label" data-i18n="projects.label">Portfolio</p>
+        <h2 class="section-title" data-i18n="projects.title">My Latest Projects</h2>
+        <p class="section-desc" data-i18n="projects.desc">Click a card to explore the full case study</p>
       </div>
-    </div>
 
     <!-- Filtri Progetti -->
     <div class="project-filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="social">Social & Branding</button>
-      <button class="filter-btn" data-filter="research">UX Research</button>
-      <button class="filter-btn" data-filter="uiux">UI & UX</button>
+      <button class="filter-btn active" data-filter="all" data-i18n="projects.filter.all">All</button>
+      <button class="filter-btn" data-filter="social" data-i18n="projects.filter.social">Social & Branding</button>
+      <button class="filter-btn" data-filter="research" data-i18n="projects.filter.research">UX Research</button>
+      <button class="filter-btn" data-filter="uiux" data-i18n="projects.filter.uiux">UI & UX</button>
     </div>
 
     <div class="projects-slider-wrap">
-      <button class="projects-arrow projects-arrow--prev" id="sliderPrev" aria-label="Previous project">&#8592;</button>
-      <button class="projects-arrow projects-arrow--next" id="sliderNext" aria-label="Next project">&#8594;</button>
+      <button class="projects-arrow projects-arrow--prev" id="sliderPrev" aria-label="Previous project"><i class="ph-light ph-arrow-left"></i></button>
+      <button class="projects-arrow projects-arrow--next" id="sliderNext" aria-label="Next project"><i class="ph-light ph-arrow-right"></i></button>
 
       <div class="projects-slider-track" id="projectsTrack">
 
         <!-- 1. SignSync — June 2026 -->
-        <div class="project-card" data-category="research" onclick="toggleCase('signsync')">
+        <div class="project-card" data-category="research" onclick="window.location.href='signsync.html'">
           <div class="project-thumb project-thumb--signsync">
-            <img src="signsync/signsynchero.png" alt="SignSync" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="signsync/signsynchero.webp" alt="SignSync" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">UX Research</span>
             <div class="project-tags"><span class="tag">Spatial Computing</span><span class="tag">UX Research</span><span class="tag">Behavioural Design</span></div>
             <h3 class="project-name">SignSync</h3>
-            <p class="project-desc">Learning <strong>sign language</strong> through visual digital nudges and spatial computing on Apple Vision Pro.</p>
+            <p class="project-desc" data-i18n-html="project.signsync.desc">Learning <strong>sign language</strong> through visual nudges and spatial computing on Apple Vision Pro.</p>
           </div>
         </div>
 
         <!-- 2. Deal! — May 2026 -->
-        <div class="project-card" data-category="uiux" onclick="toggleCase('deal')">
+        <div class="project-card" data-category="uiux" onclick="window.location.href='deal.html'">
           <div class="project-thumb project-thumb--cards">
-            <img src="deal/dealhero.png" alt="Deal!" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="deal/dealhero.webp" alt="Deal!" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">UI &amp; UX</span>
             <div class="project-tags"><span class="tag">Product</span><span class="tag">UI/UX</span><span class="tag">iOS</span></div>
             <h3 class="project-name">Deal!</h3>
-            <p class="project-desc">Solving the <strong>Abilene Paradox</strong> through private decisions — honest plans, without social pressure.</p>
+            <p class="project-desc" data-i18n-html="project.deal.desc">Tackling the <strong>Abilene Paradox</strong> with anonymous choices — honest group decisions, free from social pressure.</p>
           </div>
         </div>
 
         <!-- 3. PolyEscape — Marzo 2026 -->
-        <div class="project-card" data-category="uiux" onclick="toggleCase('poly')">
+        <div class="project-card" data-category="uiux" onclick="window.location.href='polyescape.html'">
           <div class="project-thumb project-thumb--game">
-            <img src="polyescape/polyhero.png" alt="PolyEscape" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="polyescape/polyhero.webp" alt="PolyEscape" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">UI &amp; UX</span>
             <div class="project-tags"><span class="tag">Product</span><span class="tag">UI/UX</span><span class="tag">Game Design</span></div>
             <h3 class="project-name">PolyEscape</h3>
-            <p class="project-desc">A <strong>puzzle experience</strong> shaped through iterative player testing. Progressive UX: players learn by playing, with no tutorial.</p>
+            <p class="project-desc" data-i18n-html="project.polyescape.desc">A <strong>puzzle game</strong> shaped by iterative playtesting. Progressive UX: players learn by playing, no tutorial needed.</p>
           </div>
         </div>
 
         <!-- 4. Il Progetto Fotovoltaico — Febbraio 2026 -->
-        <div class="project-card" data-category="social" onclick="toggleCase('foto')">
+        <div class="project-card" data-category="social" onclick="window.location.href='progetto-fotovoltaico.html'">
           <div class="project-thumb project-thumb--energy">
-            <img src="il-progetto-fotovoltaico/il-progetto-fotovoltaico-logo.png" alt="Il Progetto Fotovoltaico" />
+            <img src="il-progetto-fotovoltaico/il-progetto-fotovoltaico-logo1.webp" alt="Il Progetto Fotovoltaico" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">Social &amp; Branding</span>
             <div class="project-tags"><span class="tag">Communication</span><span class="tag">Brand identity</span><span class="tag">Logo design</span></div>
             <h3 class="project-name">Il Progetto Fotovoltaico</h3>
-            <p class="project-desc"><strong>Brand identity</strong> for a renewable energy company — trust and authority in a highly competitive sector.</p>
+            <p class="project-desc" data-i18n-html="project.fotovoltaico.desc"><strong>Brand identity</strong> for a renewable energy company — building trust and authority in a crowded market.</p>
           </div>
         </div>
 
         <!-- 5. Unblinking — Febbraio 2026 -->
-        <div class="project-card" data-category="uiux" onclick="toggleCase('unblinking')">
+        <div class="project-card" data-category="uiux" onclick="window.location.href='unblinking.html'">
           <div class="project-thumb project-thumb--flame">
-            <img src="unblinking/unblinkingstart-screen.png" alt="Unblinking" />
+            <img src="unblinking/unblinkingstart-screen.webp" alt="Unblinking" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">UI &amp; UX</span>
             <div class="project-tags"><span class="tag">Product</span><span class="tag">UI/UX</span><span class="tag">SwiftUI</span></div>
             <h3 class="project-name">Unblinking</h3>
-            <p class="project-desc">An <strong>iOS experience</strong> about judgment and identity. Presented at the <strong>Swift Student Challenge — Apple</strong>.</p>
+            <p class="project-desc" data-i18n-html="project.unblinking.desc">An <strong>iOS app</strong> exploring judgment and identity through gaze. Presented at the <strong>Apple Swift Student Challenge</strong>.</p>
           </div>
         </div>
 
         <!-- 6. SnapYap — Dicembre 2025 -->
-        <div class="project-card" data-category="uiux" onclick="toggleCase('snapyap')">
+        <div class="project-card" data-category="uiux" onclick="window.location.href='snapyap.html'">
           <div class="project-thumb project-thumb--memory">
-            <img src="snapyap/snaphero.png" alt="SnapYap" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="snapyap/snaphero.webp" alt="SnapYap" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">UI &amp; UX</span>
             <div class="project-tags"><span class="tag">Concept</span><span class="tag">UX Design</span><span class="tag">Interaction</span></div>
             <h3 class="project-name">SnapYap</h3>
-            <p class="project-desc">Transforming photographs into <strong>multisensory memories</strong>. A single ritual — speak to save — instead of disposable content.</p>
+            <p class="project-desc" data-i18n-html="project.snapyap.desc">Turning photos into <strong>multisensory memories</strong>: speak to relive the moment, no disposable content.</p>
           </div>
         </div>
 
         <!-- 7. Tesi Magistrale — Dicembre 2025 -->
-        <div class="project-card" data-category="research" onclick="toggleCase('tesi')">
+        <div class="project-card" data-category="research" onclick="window.location.href='nudge-neuromarketing.html'">
           <div class="project-thumb project-thumb--research">
-            <img src="tesi/tesi-prototipo-versione-nudge.png" alt="Nudge & Neuromarketing prototipo nudge" />
+            <img src="tesi/tesi-prototipo-versione-nudge.webp" alt="Nudge & Neuromarketing prototipo nudge" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">UX Research</span>
             <div class="project-tags"><span class="tag">UX Research</span><span class="tag">Interaction Design</span><span class="tag">A/B Test</span></div>
             <h3 class="project-name">Nudge &amp; Neuromarketing</h3>
-            <p class="project-desc">Experimental research on how <strong>visual design</strong> guides choice. Figma prototype + A/B test on <strong>100 participants</strong>.</p>
+            <p class="project-desc" data-i18n-html="project.nudge.desc">How <strong>visual design</strong> influences purchasing decisions. Figma prototype and A/B test with <strong>100 participants</strong>.</p>
           </div>
         </div>
 
         <!-- 8. TV Time — November 2025 -->
-        <div class="project-card" data-category="uiux" onclick="toggleCase('tvtime')">
+        <div class="project-card" data-category="uiux" onclick="window.location.href='tv-time.html'">
           <div class="project-thumb project-thumb--tvtime">
-            <img src="tv-time/tvtimehero.png" alt="TV Time" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="tv-time/tvtimehero.webp" alt="TV Time" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">UI &amp; UX</span>
             <div class="project-tags"><span class="tag">Product</span><span class="tag">UI/UX</span><span class="tag">Redesign</span></div>
             <h3 class="project-name">TV Time</h3>
-            <p class="project-desc">A <strong>redesign</strong> and new spoiler-protection feature for a daily-use app, grounded in Apple's Human Interface Guidelines.</p>
+            <p class="project-desc" data-i18n-html="project.tvtime.desc"><strong>Redesign</strong> of TV Time with a new anti-spoiler feature, built on Apple's Human Interface Guidelines.</p>
           </div>
         </div>
 
         <!-- 9. ECLISSI — Agosto 2025 -->
-        <div class="project-card" data-category="social" onclick="toggleCase('eclissi')">
+        <div class="project-card" data-category="social" onclick="window.location.href='eclissi.html'">
           <div class="project-thumb project-thumb--night">
-            <img src="eclissi/logo-eclissi.png" alt="ECLISSI logo" />
+            <img src="eclissi/logo-eclissi.webp" alt="ECLISSI logo" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">Social &amp; Branding</span>
             <div class="project-tags"><span class="tag">Brand Strategy</span><span class="tag">Logo Design</span><span class="tag">Visual Identity</span></div>
             <h3 class="project-name">ECLISSI</h3>
-            <p class="project-desc"><strong>Brand identity</strong> for an exclusive event space — one consistent identity across every touchpoint, from logo to print.</p>
+            <p class="project-desc" data-i18n-html="project.eclissi.desc"><strong>Brand identity</strong> for an exclusive event space — one seamless identity from logo to print.</p>
           </div>
         </div>
 
         <!-- 10. Pollino Flower Park — Agosto 2025 -->
-        <div class="project-card" data-category="social" onclick="toggleCase('pollino')">
+        <div class="project-card" data-category="social" onclick="window.location.href='pollino-flower-park.html'">
           <div class="project-thumb project-thumb--nature">
-            <img src="pollino-flower-park/pollino-flower-park-social.png" alt="Pollino Flower Park social" />
+            <img src="pollino-flower-park/pollino-flower-park-social.webp" alt="Pollino Flower Park social" loading="lazy" />
           </div>
           <div class="project-info">
             <span class="project-category">Social &amp; Branding</span>
             <div class="project-tags"><span class="tag">Brand Identity</span><span class="tag">Social Media</span><span class="tag">Meta Ads</span></div>
             <h3 class="project-name">Pollino Flower Park</h3>
-            <p class="project-desc">Building <strong>visibility</strong> for a hidden gem — from brand identity to a lead-generation campaign.</p>
+            <p class="project-desc" data-i18n-html="project.pollino.desc">Giving <strong>visibility</strong> to a hidden gem — from brand identity to a client acquisition campaign.</p>
           </div>
         </div>
 
       </div>
 
       <div class="projects-dots" id="projectsDots">
-        <button class="projects-dot active" data-index="0" aria-label="Project 1"></button>
-        <button class="projects-dot" data-index="1" aria-label="Project 2"></button>
-        <button class="projects-dot" data-index="2" aria-label="Project 3"></button>
-        <button class="projects-dot" data-index="3" aria-label="Project 4"></button>
-        <button class="projects-dot" data-index="4" aria-label="Project 5"></button>
-        <button class="projects-dot" data-index="5" aria-label="Project 6"></button>
-        <button class="projects-dot" data-index="6" aria-label="Project 7"></button>
-        <button class="projects-dot" data-index="7" aria-label="Project 8"></button>
-        <button class="projects-dot" data-index="8" aria-label="Project 9"></button>
-        <button class="projects-dot" data-index="9" aria-label="Project 10"></button>
       </div>
     </div>
-
-    <!-- case study panels -->
-
-
-    <!-- SignSync -->
-    <div class="case-study-panel" id="case-signsync">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal">
-          <img src="signsync/signsynchero.png" alt="SignSync Hero" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Spatial Computing · Behavioural Design</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Spatial Computing · Behavioural Design</span><span class="cs-dot"></span><span class="cs-year">June 2026</span></div>
-          <h2 class="cs-title">SignSync</h2>
-          <p class="cs-subtitle">Learning sign language through visual digital nudges and spatial computing.</p>
-          <div class="cs-role"><span class="tag">Concept</span><span class="tag">Spatial Computing</span><span class="tag">Behavioural Design</span><span class="tag">Apple Vision Pro</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">A conversation that started it</h3>
-            <p class="cs-chapter-body">At the Apple Developer Academy, a conversation with a deaf teacher changed my perspective. We had to use an interpreter, and she told me something that stuck: in many situations, her smartphone is her 'best friend.' It made me realize that communication isn't a given.</p>
-            <p class="cs-chapter-body">I also learned that not all deaf people know sign language, often because traditional courses are inaccessible. That gap felt like something technology could actually bridge.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="signsync/signsyncicon.png" alt="SignSync Icon" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">The problem with video</h3>
-            <p class="cs-chapter-body">Sign language is motor learning. Small variations in hand position can completely change a gesture's meaning. Yet, most learning tools rely on videos. You watch a screen, try to mimic it, and guess if you got it right.</p>
-            <p class="cs-chapter-body">The challenge was: how do you teach a precise physical skill without trapping the user behind a 2D screen or interrupting them with constant corrections?</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="signsync/signsyncscreen1.png" alt="SignSync Screen 1" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">Nudges and Ghost Hands</h3>
-            <p class="cs-chapter-body">My master's thesis explored how visual digital nudges influence decisions. SignSync tests if those same principles can guide motor learning.</p>
-            <p class="cs-chapter-body">Instead of explicit instructions, the experience uses semi-transparent 'ghost hands' in spatial computing. They act as visual nudges—guiding attention and encouraging imitation in real-time, right next to the user's own hands.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="signsync/signsyncscreen2.png" alt="SignSync Screen 2" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Solution</p>
-            <h3 class="cs-chapter-label">From translation to imitation</h3>
-            <p class="cs-chapter-body">Designed for Apple Vision Pro, SignSync shifts learning from translation (watching a screen and copying) to direct spatial imitation. While currently a research concept focused on sign language, the broader question it asks is whether spatial nudges can transform how we acquire any physical skill—from rehabilitation to education.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="signsync/signsyncscreen3.png" alt="SignSync Screen 3" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        </div>
-      </div>
     </div>
-
-
-    <!-- Deal! -->
-    <div class="case-study-panel" id="case-deal">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal">
-          <img src="deal/dealhero.png" alt="Deal! Hero" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Product Design · iOS</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Product Design · iOS</span><span class="cs-dot"></span><span class="cs-year">May 2026</span></div>
-          <h2 class="cs-title">Deal!</h2>
-          <p class="cs-subtitle">Solving the Abilene Paradox through private decisions.</p>
-          <div class="cs-role"><span class="tag">UX Design</span><span class="tag">User Flows</span><span class="tag">Navigation Design</span><span class="tag">Apple HIG</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">The Abilene Paradox</h3>
-            <p class="cs-chapter-body">"I'm fine with whatever." "If everyone else is down..." "Next time, someone else chooses!"</p>
-            <p class="cs-chapter-body">We've all heard these sentences. It's called the Abilene Paradox: a situation where a group agrees on a plan that nobody actually wanted, just to avoid conflict. During the project, my team and I realized we weren't just designing for a target audience—we <em>were</em> the target audience.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="deal/dealicon.png" alt="Deal! Context" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">Honesty without pressure</h3>
-            <p class="cs-chapter-body">If someone suggests grabbing a beer, you might say yes just because you think everyone else wants to. Before you know it, the whole group has agreed on something nobody genuinely wanted to do.</p>
-            <p class="cs-chapter-body">The challenge was: how do we design an experience where friends can express what they actually want to do, without social pressure swaying their answers?</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="deal/dealscreen1.png" alt="Deal! Challenge" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process & Solution</p>
-            <h3 class="cs-chapter-label">A private decision loop</h3>
-            <p class="cs-chapter-body">We solved this by making preferences invisible. Users create activity cards for things they'd genuinely like to do. Friends then privately swipe on these ideas.</p>
-            <p class="cs-chapter-body">The swipe interaction was deliberately chosen to encourage instinctive, honest responses rather than overthinking. A plan only surfaces when there's a match. Because we were handling delicate social dynamics, privacy was paramount—we integrated Sign in with Apple to hide emails and keep interactions completely confidential by default.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="deal/dealscreen2.png" alt="Deal! Solution" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">Designing the flow</h3>
-            <p class="cs-chapter-body">Developed within a multidisciplinary team of six, my contribution focused on UX design, user flows, and navigation patterns following Apple's Human Interface Guidelines.</p>
-            <p class="cs-chapter-body">One of the main design challenges was structuring an intuitive app flow without relying on a traditional tab bar.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="deal/dealscreen3.png" alt="Deal! Contributions" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-header cs-reveal" style="margin-bottom:var(--s6);">
-          <p class="cs-chapter-eyebrow">Outcome</p>
-          <h3 class="cs-chapter-label" style="margin-bottom:0;">Deal! launched via TestFlight.</h3>
-        </div>
-
-        </div>
-      </div>
-    </div>
-
-
-    <!-- PolyEscape -->
-    <div class="case-study-panel" id="case-poly">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal">
-          <img src="polyescape/polyhero.png" alt="PolyEscape Hero" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Product Design · Game</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Product Design · Game</span><span class="cs-dot"></span><span class="cs-year">March 2026</span></div>
-          <h2 class="cs-title">PolyEscape</h2>
-          <p class="cs-subtitle">A puzzle experience shaped through iterative player testing.</p>
-          <div class="cs-role"><span class="tag">Product</span><span class="tag">UI/UX</span><span class="tag">Game Design</span><span class="tag">Team Project</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">Two extremes, one gap</h3>
-            <p class="cs-chapter-body">Many puzzle games fall into two extremes: too simplistic and shallow, or overly complex with a high cognitive load. PolyEscape was built in Unity with Borum Studio to find the sweet spot: a puzzle-exploration game that is easy to learn, but deeply engaging.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="polyescape/polyscreen1.png" alt="PolyEscape Context" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">Players felt lost</h3>
-            <p class="cs-chapter-body">Our first prototype featured a strict UI color system to reduce cognitive load. But testing revealed a deeper problem: mechanical clarity wasn't enough. Players felt lost on every level. They didn't know what to do, where to go, or why it mattered.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="polyescape/polyscreen2.png" alt="PolyEscape Challenge" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">Iterating on clarity</h3>
-            <p class="cs-chapter-body">Each round of testing translated a single insight into a concrete design decision. Four iterations reshaped how the game communicates without explaining.</p>
-            <div class="cs-point-grid">
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Dialogue Integration</div><div class="cs-point-desc">Light narrative cues replace static instructions.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Environmental Landmarks</div><div class="cs-point-desc">The city itself signals direction and progress.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Dynamic Rhythms</div><div class="cs-point-desc">Pacing adjusts to keep tension calibrated.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Emotional Thread</div><div class="cs-point-desc">A throughline gives every level a reason to matter.</div></div>
-            </div>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="polyescape/polyscreen3.png" alt="PolyEscape Process" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">Shaping the experience layer</h3>
-            <p class="cs-chapter-body">Developed alongside designers and developers at Borum Studio, my contribution went beyond early UX/UI design to include game mechanics and Player Experience (PX) testing. The core focus was translating user friction into targeted environmental design solutions.</p>
-            <div class="cs-role"><span class="tag">Moodboards</span><span class="tag">Game Mechanics</span><span class="tag">Early UX Design</span><span class="tag">Early UI Design</span></div>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="polyescape/polyscreen4.png" alt="PolyEscape Contributions" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Solution</p>
-            <h3 class="cs-chapter-label">Guiding without explaining</h3>
-            <p class="cs-chapter-body">Environmental storytelling and recognizable landmarks naturally guide players through the world.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="polyescape/polyscreen5.png" alt="PolyEscape Solution" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Outcome</p>
-            <h3 class="cs-chapter-label">App Store launch</h3>
-            <p class="cs-chapter-body">PolyEscape successfully shipped to the App Store.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="polyescape/polyscreen6.png" alt="PolyEscape Outcome" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-footer cs-reveal">
-          <a href="https://apps.apple.com/it/app/polyescape-find-your-way-out/id6759678668?l=en-GB" class="cs-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on App Store</a>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Il Progetto Fotovoltaico -->
-    <div class="case-study-panel" id="case-foto">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal" style="aspect-ratio: auto;">
-          <img src="il-progetto-fotovoltaico/il-progetto-fotovoltaico-logo.png" alt="Il Progetto Fotovoltaico logo" loading="lazy" style="width: 100%; height: auto !important; object-fit: contain; display: block;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Brand Identity</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Brand Identity</span><span class="cs-dot"></span><span class="cs-year">February 2026</span></div>
-          <h2 class="cs-title">Il Progetto Fotovoltaico</h2>
-          <p class="cs-subtitle">Building a visual identity for a sub-brand in the renewable energy sector.</p>
-          <div class="cs-role"><span class="tag">Communication</span><span class="tag">Brand Identity</span><span class="tag">Logo Design</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">A solid service, no identity</h3>
-            <p class="cs-chapter-body">The client offered a solid service but lacked a clear identity. The brief was to convey a sense of familiarity while leveraging the existing presence of La Casa del Fotovoltaico, as Il Progetto Fotovoltaico was conceived as its sub-brand.</p>
-          </div>
-          <div class="cs-chapter-visual" style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <img src="il-progetto-fotovoltaico/mainbrand.png" alt="Main Brand Logo" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-            <img src="il-progetto-fotovoltaico/il-progetto-fotovoltaico-logo.png" alt="Il Progetto Fotovoltaico Logo" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">Trust in a crowded market</h3>
-            <p class="cs-chapter-body">How can a new brand establish its own personality while maintaining continuity with an already recognizable parent brand?</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="il-progetto-fotovoltaico/il-progetto-fotovoltaico-positivo-e-negativo.png" alt="Logo positive and negative" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">Palette and typography</h3>
-            <p class="cs-chapter-body">Color carries meaning before words do. The palette evokes sunlight without falling into environmentalist clichés — warm, clean tones that read as professional and approachable. A modern sans-serif completes the system, legible at any size.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="il-progetto-fotovoltaico/il-progetto-fotovoltaico-font-e-colori.png" alt="Color palette and font" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">Identity, end to end</h3>
-            <p class="cs-chapter-body">My contribution focused on brand identity and visual design, helping define a coherent visual language capable of balancing familiarity and differentiation.</p>
-            <div class="cs-role"><span class="tag">Brand Identity</span><span class="tag">Logo Design</span><span class="tag">Color &amp; Type System</span><span class="tag">Social Templates</span></div>
-          </div>
-
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Solution</p>
-            <h3 class="cs-chapter-label">A system, not just a logo</h3>
-            <p class="cs-chapter-body">A consistent identity system was developed to create a recognizable sub-brand while preserving the trust and credibility associated with the parent company. Typography, colours, and graphic elements were designed to strengthen the relationship between the two brands without sacrificing the individuality of the new venture.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="il-progetto-fotovoltaico/il-progetto-fotovoltaico-template-instagram.png" alt="Template Instagram" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-footer cs-reveal">
-          <a href="https://www.instagram.com/ilprogettofotovoltaico/" class="cs-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on Instagram</a>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Unblinking -->
-    <div class="case-study-panel" id="case-unblinking">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal" style="aspect-ratio: auto;">
-          <img src="unblinking/unblinkingstart-screen.png" alt="Unblinking start screen" loading="lazy" style="width: 100%; height: auto !important; object-fit: contain; display: block;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Product Design · SwiftUI</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Product Design · SwiftUI</span><span class="cs-dot"></span><span class="cs-year">February 2026</span></div>
-          <h2 class="cs-title">Unblinking</h2>
-          <p class="cs-subtitle">An interactive experience about judgment and identity.</p>
-          <div class="cs-role"><span class="tag">Product</span><span class="tag">UI/UX</span><span class="tag">SwiftUI</span><span class="tag">Apple Developer Academy</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">Hiding to be accepted</h3>
-            <p class="cs-chapter-body">Many people learn to hide parts of themselves in order to be accepted. Unblinking translates this emotional condition into an interactive experience.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="unblinking/unblinkingstart-screen.png" alt="Start screen" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Metaphor</p>
-            <h3 class="cs-chapter-label">A flame under pressure</h3>
-            <p class="cs-chapter-body">A flame represents anyone who has ever felt exposed under the gaze of others. As pressure increases, the flame weakens and hides behind a mask — a visual language for concealment that needs no explanation.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="unblinking/unblinkingblue-flame.png" alt="Blue Flame screen" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">What can be controlled</h3>
-            <p class="cs-chapter-body">How can an interactive experience encourage reflection without imposing a single interpretation?</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="unblinking/unblinkingcrazy-flame.png" alt="Crazy Flame screen" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">Built for accessibility</h3>
-            <p class="cs-chapter-body">Animations only carry meaning if everyone can perceive them. Accessibility was treated as a design constraint from the start, not an afterthought.</p>
-            <div class="cs-point-grid">
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Visual Clarity</div><div class="cs-point-desc">High-contrast states at every stage of the animation.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Dynamic VoiceOver</div><div class="cs-point-desc">Narration adapts to the state of the experience.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Screen Reader Optimization</div><div class="cs-point-desc">Every element labeled for assistive technology.</div></div>
-            </div>
-            <div class="cs-point-grid">
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">SwiftUI</div><div class="cs-point-desc">Native framework for state-driven interfaces.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">State-Based Animations</div><div class="cs-point-desc">Visuals respond directly to user interaction.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Landscape Immersion</div><div class="cs-point-desc">Full-screen orientation for focus.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">LLMs as Learning Partners</div><div class="cs-point-desc">Used to accelerate SwiftUI problem-solving.</div></div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">From concept to code</h3>
-            <p class="cs-chapter-body">I was responsible for UX design, asset creation, interaction design, and SwiftUI development.</p>
-            <div class="cs-role"><span class="tag">UX Design</span><span class="tag">Asset Design</span><span class="tag">SwiftUI Development</span></div>
-          </div>
-
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Solution</p>
-            <h3 class="cs-chapter-label">From concealment to ease</h3>
-            <p class="cs-chapter-body">A flame acts as a metaphor for identity, transforming emotional states into interactive experiences.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="unblinking/unblinkingend.png" alt="End screen" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-header cs-reveal" style="margin-bottom:var(--s6);">
-          <p class="cs-chapter-eyebrow">Outcome</p>
-          <h3 class="cs-chapter-label" style="margin-bottom:0;">Developed for the Apple Swift Student Challenge, Unblinking explores how interactive experiences can foster self-awareness.</h3>
-        </div>
-
-        </div>
-      </div>
-    </div>
-
-
-    <!-- SnapYap -->
-    <div class="case-study-panel" id="case-snapyap">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal">
-          <img src="snapyap/snaphero.png" alt="SnapYap Hero" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Concept · UX Design</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Concept · UX Design</span><span class="cs-dot"></span><span class="cs-year">December 2025</span></div>
-          <h2 class="cs-title">SnapYap</h2>
-          <p class="cs-subtitle">Transforming photographs into multisensory memories.</p>
-          <div class="cs-role"><span class="tag">Concept</span><span class="tag">UX Design</span><span class="tag">Interaction Design</span><span class="tag">Team Project</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">The Pivot</h3>
-            <p class="cs-chapter-body">We initially set out to build a color-to-sound app. But a few days in, our team realized the idea lacked emotional longevity—it was a gimmick, not a product. We scrapped it and pivoted to a much simpler mission: creating something that actually replicates how human memory works.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="snapyap/snapscreen1.png" alt="SnapYap Context" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">Why not just record a video?</h3>
-            <p class="cs-chapter-body">Human memory doesn't work like a video recorder; it stores frozen mental images anchored to specific sounds and feelings. Video recordings, on the other hand, often feel performative and cause sensory overload. The challenge was: how do we design a digital memory that feels as authentic and spontaneous as a real one?</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="snapyap/snapscreen2.png" alt="SnapYap Challenge" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">The Ritual of Action</h3>
-            <p class="cs-chapter-body">SnapYAP transforms standard photographs into multisensory memories by blending static images with personal voice notes.</p>
-            <p class="cs-chapter-body">To save a photo, the user is required to speak. This isn't just a technical requirement—it's a conscious ritual. It forces you to stop and process the moment. By keeping the visual static and letting the audio become the narrator, SnapYAP acts as a private digital diary rather than a performance.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="snapyap/snapscreen3.png" alt="SnapYap Process" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">Shaping the core interaction</h3>
-            <p class="cs-chapter-body">Working alongside a team of designers and developers, my role focused on UX/UI design. My main focus was shaping the core interaction flow—specifically the mechanic that ties the act of speaking directly to the image development process.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="snapyap/snapscreen4.png" alt="SnapYap Contributions" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-
-
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Tesi Magistrale / Nudge & Neuromarketing -->
-    <div class="case-study-panel" id="case-tesi">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal">
-          <img src="tesi/tesi-prototipo-versione-nudge.png" alt="Thesis nudge prototype" loading="lazy" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">UX Research</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">UX Research · Interaction Design</span><span class="cs-dot"></span><span class="cs-year">December 2025</span></div>
-          <h2 class="cs-title">Nudge &amp; Neuromarketing</h2>
-          <p class="cs-subtitle">Exploring how behavioural design influences sustainable decisions.</p>
-          <div class="cs-role"><span class="tag">UX Research</span><span class="tag">Interaction Design</span><span class="tag">Figma</span><span class="tag">A/B Test</span><span class="tag">Neuromarketing</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">A question at the intersection</h3>
-            <p class="cs-chapter-body">This research project investigates how subtle interface changes can encourage users to make more sustainable choices.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="tesi/tesi-prototipo-versione-controllo.png" alt="Control version prototype" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">Subtle, yet measurable</h3>
-            <p class="cs-chapter-body">Can digital nudges influence environmentally conscious decisions without restricting freedom of choice?</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="tesi/tesi-prototipo-versione-nudge.png" alt="Nudge version prototype" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">Two checkout flows</h3>
-            <p class="cs-chapter-body">Two versions of an e-commerce checkout (MarketPlace.it) were built in Figma. The control version presented delivery options neutrally. The experimental version introduced a visual nudge — icons, colors and microcopy implying environmental impact, without ever naming "sustainability".</p>
-            <div class="cs-point-grid">
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Control Version</div><div class="cs-point-desc">Neutral presentation, no visual influence.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Nudge Version</div><div class="cs-point-desc">Color and iconography imply environmental impact.</div></div>
-            </div>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="tesi/tesi-nudge.png" alt="Nudge visual" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">Research, end to end</h3>
-            <p class="cs-chapter-body">My contribution focused on UX research and interaction design.</p>
-            <div class="cs-role"><span class="tag">UX Research</span><span class="tag">Figma Prototyping</span><span class="tag">A/B Testing</span><span class="tag">Data Analysis</span></div>
-          </div>
-
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Solution</p>
-            <h3 class="cs-chapter-label">A purely visual nudge</h3>
-            <p class="cs-chapter-body">Different interface solutions were explored to understand how visual digital nudges affect user behaviour.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="tesi/tesi-risultati.png" alt="A/B test results" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-stats-row">
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">72%</div><div class="cs-stat-label">Sustainable choice with nudge</div></div>
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">vs 30%</div><div class="cs-stat-label">Without nudge</div></div>
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">92%</div><div class="cs-stat-label">Did not consciously notice the nudge</div></div>
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">p&lt;0.001</div><div class="cs-stat-label">Statistical significance</div></div>
-        </div>
-
-        </div>
-      </div>
-    </div>
-
-
-    <!-- TV Time -->
-    <div class="case-study-panel" id="case-tvtime">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal">
-          <img src="tv-time/tvtimehero.png" alt="TV Time Hero" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">UI &amp; UX</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">UI &amp; UX</span><span class="cs-dot"></span><span class="cs-year">November 2025</span></div>
-          <h2 class="cs-title">TV Time</h2>
-          <p class="cs-subtitle">Redesigning a familiar experience through Apple’s Human Interface Guidelines.</p>
-          <div class="cs-role"><span class="tag">UX Design</span><span class="tag">UI Design</span><span class="tag">Feature Design</span><span class="tag">Apple HIG</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">Designing what I use every day</h3>
-            <p class="cs-chapter-body">I've used TV Time almost every day for years. When you use an app that much, you don't just see its features—you feel its friction. Despite a great community, the interface felt cluttered, and worst of all, it felt sluggish. I decided to sit down and redesign the tool I open every night.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="tv-time/tvtimescreen1.png" alt="TV Time Context" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">Performance through design</h3>
-            <p class="cs-chapter-body">How do you fix an app that feels slow without touching the backend code? The challenge was improving the <em>perceived</em> performance and cleaning up the information architecture, without alienating millions of users who already rely on the current layout.</p>
-          </div>
-
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">Applying HIG to real friction</h3>
-            <p class="cs-chapter-body">I stripped back the visual noise and rebuilt the core flows strictly following Apple's Human Interface Guidelines (HIG). By leveraging native design patterns, standard typography scales, and familiar navigation structures, the interface not only looked cleaner—it felt immediately faster and more responsive.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="tv-time/tvtimescreen2.png" alt="TV Time Process" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Feature</p>
-            <h3 class="cs-chapter-label">ShUSH! Don't EVEN TRY it!</h3>
-            <p class="cs-chapter-body">Beyond the visual cleanup, I designed a brand-new spoiler-protection system. Using a native-feeling toggle and a dynamic blurring system, the feature allows users to safely browse discussions and rate episodes without the constant anxiety of a ruined plot twist.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="tv-time/tvtimescreen3.png" alt="TV Time Feature" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">End-to-End Redesign</h3>
-            <p class="cs-chapter-body">As a solo passion project, I handled the entire process: auditing the existing UX, restructuring the information architecture, and designing the new UI to strict HIG standards.</p>
-          </div>
-
-        </div>
-
-
-
-        </div>
-      </div>
-    </div>
-
-
-    <!-- ECLISSI -->
-    <div class="case-study-panel" id="case-eclissi">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal" style="aspect-ratio: auto;">
-          <img src="eclissi/logo-eclissi.png" alt="ECLISSI — logo brand identity" loading="lazy" style="width: 100%; height: auto !important; object-fit: contain; display: block;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Brand Identity · 2025</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Brand Identity</span><span class="cs-dot"></span><span class="cs-year">August 2025</span></div>
-          <h2 class="cs-title">ECLISSI</h2>
-          <p class="cs-subtitle">Creating a visual identity inspired by mystery and elegance.</p>
-          <div class="cs-role"><span class="tag">Brand Strategy</span><span class="tag">Logo Design</span><span class="tag">Visual Identity</span><span class="tag">Figma</span><span class="tag">Social</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">A premium event space</h3>
-            <p class="cs-chapter-body">ECLISSI is a premium event space designed as an elegant, safe alternative to traditional nightclubs. Targeting a 25-40 demographic, the business goal was clear: move away from one-off events and build a loyal community around a high-end, reassuring nightlife experience.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="eclissi/logo-eclissi.png" alt="Logo ECLISSI" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">Restraint as differentiation</h3>
-            <p class="cs-chapter-body">How do you visually communicate 'premium' without feeling elitist? The challenge was balancing mystery with accessibility. The visual identity needed to signal a sophisticated, secure environment, especially for a female audience, while avoiding the clichés of typical club branding.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="eclissi/logo-negativo-positivo.png" alt="Logo positive and negative" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">A system in near-midnight</h3>
-            <p class="cs-chapter-body">The palette starts from a deep, almost midnight black, with cold gold as the only accent — not warm color, but color that signals who belongs. A modern serif carries the headlines; a compact sans handles the body copy.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="eclissi/colori-e-font-eclissi.png" alt="Color palette and font" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">Strategy through execution</h3>
-            <p class="cs-chapter-body">I led the brand strategy and visual execution—translating the business goal of a safe, premium nightlife experience into a comprehensive visual identity, logo design, and social media direction.</p>
-            <div class="cs-role"><span class="tag">Brand Strategy</span><span class="tag">Logo Design</span><span class="tag">Visual Identity</span><span class="tag">Social Direction</span></div>
-          </div>
-
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Solution</p>
-            <h3 class="cs-chapter-label">A guideline, fully delivered</h3>
-            <p class="cs-chapter-body">A complete brand guideline and digital presence. The visual language establishes ECLISSI not just as a location, but as a modern, sophisticated destination with a clear standard of quality.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="eclissi/social-eclissi.png" alt="Social ECLISSI" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-footer cs-reveal">
-          <a href="https://www.instagram.com/eclissi_eventi/" class="cs-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M17 7l0 0"/></svg>View on Instagram</a>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Pollino Flower Park -->
-    <div class="case-study-panel" id="case-pollino">
-      <button class="cs-close-btn" onclick="closePanels()" aria-label="Close">&#x2715;</button>
-      <div class="case-study-inner">
-        <div class="cs-hero cs-reveal" style="aspect-ratio: auto;">
-          <img src="pollino-flower-park/pollino-flower-park-logo.png" alt="Logo Pollino Flower Park" loading="lazy" style="width: 100%; height: auto !important; object-fit: contain; display: block;" />
-          <div class="cs-hero-overlay"><span class="cs-hero-tag">Brand · Social · Ads</span></div>
-        </div>
-        <div class="cs-header cs-reveal">
-          <div class="cs-label-row"><span class="cs-category">Brand · Social · Ads</span><span class="cs-dot"></span><span class="cs-year">August 2025</span></div>
-          <h2 class="cs-title">Pollino Flower Park</h2>
-          <p class="cs-subtitle">Building visibility for a hidden gem.</p>
-          <div class="cs-role"><span class="tag">Brand Identity</span><span class="tag">Social Media</span><span class="tag">Content Creation</span><span class="tag">Meta Ads</span></div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Context</p>
-            <h3 class="cs-chapter-label">Zero online visibility</h3>
-            <p class="cs-chapter-body">Pollino Flower Park initially had no online presence. The goal was to transform it into a recognizable destination for eco-tourists and outdoor enthusiasts.</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="pollino-flower-park/pollino-flower-park-logo.png" alt="Logo Pollino Flower Park" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Challenge</p>
-            <h3 class="cs-chapter-label">From hidden gem to destination</h3>
-            <p class="cs-chapter-body">How can visual storytelling communicate the values of eco-hospitality and slow tourism?</p>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="pollino-flower-park/pollino-flower-park-colori-e-font.png" alt="Color palette and font" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Process</p>
-            <h3 class="cs-chapter-label">A three-part strategy</h3>
-            <p class="cs-chapter-body">The visual system and content plan were built around the location's strongest asset: the experience itself.</p>
-            <div class="cs-point-grid">
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Visual Storytelling</div><div class="cs-point-desc">Imagery built around the natural setting.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Experience-Driven Content</div><div class="cs-point-desc">Content centered on what guests actually do.</div></div>
-              <div class="cs-point-card cs-reveal"><div class="cs-point-title">Brand Consistency</div><div class="cs-point-desc">One voice across every channel and touchpoint.</div></div>
-            </div>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="pollino-flower-park/pollino-flower-park-social.png" alt="Social mockup" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">My Contributions</p>
-            <h3 class="cs-chapter-label">From identity to acquisition</h3>
-            <p class="cs-chapter-body">My work focused on visual storytelling, social media strategy, and content creation.</p>
-            <div class="cs-role"><span class="tag">Brand Identity</span><span class="tag">Social Media Strategy</span><span class="tag">Content Creation</span></div>
-          </div>
-          <div class="cs-chapter-visual">
-            <img src="pollino-flower-park/pollino-flower-park-mockup.png" alt="Signage mockup" class="cs-reveal" style="max-width: 100%; height: auto; border-radius: 24px;" />
-          </div>
-        </div>
-
-        <div class="cs-chapter">
-          <div class="cs-chapter-text cs-reveal-left">
-            <p class="cs-chapter-eyebrow">Solution</p>
-            <h3 class="cs-chapter-label">Nature at the core</h3>
-            <p class="cs-chapter-body">Nature and outdoor experiences became the core elements of the brand identity.</p>
-          </div>
-
-        </div>
-
-        <div class="cs-header cs-reveal" style="margin-bottom:var(--s6);">
-          <p class="cs-chapter-eyebrow">Outcome</p>
-          <h3 class="cs-chapter-label" style="margin-bottom:0;">The project generated significant growth in visibility and audience engagement.</h3>
-        </div>
-
-        <div class="cs-header cs-reveal" style="margin-bottom:0;">
-          <p class="cs-chapter-eyebrow">Impact Metrics</p>
-        </div>
-        <div class="cs-stats-row">
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">24.8K+</div><div class="cs-stat-label">Views</div></div>
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">6.7K+</div><div class="cs-stat-label">Reach</div></div>
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">940+</div><div class="cs-stat-label">Link Clicks</div></div>
-          <div class="cs-stat cs-reveal"><div class="cs-stat-value">+23%</div><div class="cs-stat-label">Growth</div></div>
-        </div>
-
-        <div class="cs-footer cs-reveal">
-          <a href="https://www.instagram.com/pollinoflowerpark/" class="cs-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on Instagram</a>
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <!-- SERVIZI -->
-  <section id="servizi" class="section">
+  <section id="competenze" class="section">
     <div class="container">
       <div class="section-header">
-        <p class="section-label">What I Do</p>
-        <h2 class="section-title">How Can I Help You?</h2>
-        <p class="section-desc">I work across <strong>digital marketing</strong>, content and <strong>design</strong> to help your brand grow online.</p>
+        <p class="section-label" data-i18n="services.label">What I Do</p>
+        <h2 class="section-title" data-i18n="services.title">How Can I Help You?</h2>
+        <p class="section-desc" data-i18n-html="services.desc">I work across <strong>digital marketing</strong>, content and <strong>design</strong> to help your brand grow online.</p>
       </div>
       <div class="services-grid">
-        <div class="service-card"><div class="service-icon">📣</div><h3 class="service-name">Ad Campaign Management</h3><p class="service-desc">I create and manage advertising campaigns on <strong>Facebook and Instagram</strong> to introduce businesses, products and services to new audiences.</p><a href="#contatti" class="service-cta">Talk to me →</a></div>
-        <div class="service-card"><div class="service-icon">📱</div><h3 class="service-name">Social Media Management</h3><p class="service-desc">I organize content, build an <strong>editorial plan</strong> and oversee communication so every page stays clear, consistent and engaging.</p><a href="#contatti" class="service-cta">Tell your brand's story →</a></div>
-        <div class="service-card"><div class="service-icon">✏️</div><h3 class="service-name">Content Creation</h3><p class="service-desc">I design <strong>graphics and visual content</strong> for posts, stories and digital communication using <strong>Figma</strong> and <strong>Canva</strong>.</p><a href="#contatti" class="service-cta">Create content →</a></div>
-        <div class="service-card"><div class="service-icon">🎬</div><h3 class="service-name">Video for Social Media</h3><p class="service-desc">I create and edit <strong>social media video</strong> content, reels and promotional material with <strong>CapCut</strong> and <strong>DaVinci Resolve</strong>.</p><a href="#contatti" class="service-cta">A video says more →</a></div>
-        <div class="service-card"><div class="service-icon">🌐</div><h3 class="service-name">Website Design</h3><p class="service-desc">I build easy-to-use, visually refined <strong>websites</strong> that help people find the information they need right away.</p><a href="#contatti" class="service-cta">Let's build your space →</a></div>
-        <div class="service-card"><div class="service-icon">📐</div><h3 class="service-name">App &amp; Digital Product Design</h3><p class="service-desc">I design <strong>digital interfaces</strong> with equal attention to visual quality and usability: <strong>form and function</strong>, always together.</p><a href="#contatti" class="service-cta">Design the experience →</a></div>
+        <div class="service-card"><div class="service-icon"><i class="ph-light ph-megaphone"></i></div><h3 class="service-name" data-i18n="services.ad.title">Ad Campaign Management</h3><p class="service-desc" data-i18n-html="services.ad.desc">I create and manage advertising campaigns on <strong>Facebook and Instagram</strong> to introduce businesses, products and services to new audiences.</p></div>
+        <div class="service-card"><div class="service-icon"><i class="ph-light ph-device-mobile"></i></div><h3 class="service-name" data-i18n="services.social.title">Social Media Management</h3><p class="service-desc" data-i18n-html="services.social.desc">I organize content, build an <strong>editorial plan</strong> and oversee communication so every page stays clear, consistent and engaging.</p></div>
+        <div class="service-card"><div class="service-icon"><i class="ph-light ph-pencil-simple"></i></div><h3 class="service-name" data-i18n="services.content.title">Content Creation</h3><p class="service-desc" data-i18n-html="services.content.desc">I design <strong>graphics and visual content</strong> for posts, stories and digital communication using <strong>Figma</strong> and <strong>Canva</strong>.</p></div>
+        <div class="service-card"><div class="service-icon"><i class="ph-light ph-film-strip"></i></div><h3 class="service-name" data-i18n="services.video.title">Video for Social Media</h3><p class="service-desc" data-i18n-html="services.video.desc">I create and edit <strong>social media video</strong> content, reels and promotional material with <strong>CapCut</strong> and <strong>DaVinci Resolve</strong>.</p></div>
+        <div class="service-card"><div class="service-icon"><i class="ph-light ph-globe"></i></div><h3 class="service-name" data-i18n="services.web.title">Website Design</h3><p class="service-desc" data-i18n-html="services.web.desc">I build easy-to-use, visually refined <strong>websites</strong> that help people find the information they need right away.</p></div>
+        <div class="service-card"><div class="service-icon"><i class="ph-light ph-pen-nib"></i></div><h3 class="service-name" data-i18n="services.app.title">App &amp; Digital Product Design</h3><p class="service-desc" data-i18n-html="services.app.desc">I design <strong>digital interfaces</strong> with equal attention to visual quality and usability: <strong>form and function</strong>, always together.</p></div>
       </div>
     </div>
   </section>
@@ -1999,8 +269,8 @@
   <section id="about" class="section">
     <div class="container">
       <div class="section-header">
-        <p class="section-label">About</p>
-        <h2 class="section-title">A Bit About Me</h2>
+        <p class="section-label" data-i18n="about.label">About</p>
+        <h2 class="section-title" data-i18n="about.title">A Bit About Me</h2>
       </div>
 
       <div class="about-grid--simple">
@@ -2008,21 +278,21 @@
         <!-- profile image -->
         <div class="about-visual about-visual--simple">
           <div class="about-photo">
-            <img src="profile/profile-photo.png" alt="Luigi Viggiano" style="width: 100%; height: auto; display: block;" />
+            <img src="profile/profile-photo.webp" alt="Luigi Viggiano" style="width: 100%; height: auto; display: block;" loading="lazy" />
           </div>
         </div>
 
         <!-- about text -->
         <div class="about-text--simple">
           <div class="about-bio">
-            <p>I am Luigi, a multidisciplinary designer combining creativity, strategy, and analytics to build digital products.</p>
-            <p>Thanks to my background, I am highly adaptable, a fast learner, and skilled at tackling challenges from multiple perspectives. Curious and detail-oriented, I approach every project with one core question: what is the problem to solve?</p>
+            <p data-i18n="about.p1">I am Luigi, a multidisciplinary designer combining creativity, strategy, and analytics to build digital products.</p>
+            <p data-i18n="about.p2">Thanks to my background, I am highly adaptable, a fast learner, and skilled at tackling challenges from multiple perspectives. Curious and detail-oriented, I approach every project with one core question: what is the problem to solve?</p>
           </div>
 
           <!-- tools -->
           <div class="about-skills about-skills--simple">
             <div class="about-skill-group">
-              <span class="about-skill-label">Tools</span>
+              <span class="about-skill-label" data-i18n="about.tools">Tools</span>
               <div class="about-skill-tags">
                 <span class="tag">Figma</span>
                 <span class="tag">Sketch</span>
@@ -2040,8 +310,8 @@
 
           <!-- buttons -->
           <div class="about-cta about-cta--row">
-            <a href="#contatti" class="btn btn-primary">Let's Work Together →</a>
-            <a href="CV/CV_Luigi Viggiano ENG.pdf" class="btn btn-ghost" download>Download CV</a>
+            <a href="#contatti" class="btn btn-primary"><span data-i18n="about.cta">Let's Work Together</span> <i class="ph-light ph-arrow-right" ></i></a>
+            <a href="cv.html" class="btn btn-ghost" data-i18n="about.cv">View Resume</a>
           </div>
         </div>
 
@@ -2053,250 +323,84 @@
   <section id="contatti" class="section">
     <div class="container">
       <div class="section-header">
-        <p class="section-label">Get in touch</p>
-        <h2 class="section-title">Let's Talk</h2>
-        <p class="section-desc">Got an idea, a project, or just a question? Reach out.</p>
+        <p class="section-label" data-i18n="contact.label">Get in touch</p>
+        <h2 class="section-title" data-i18n="contact.title">Let's Talk</h2>
+        <p class="section-desc" data-i18n="contact.desc">Got an idea, a project, or just a question? Reach out.</p>
       </div>
       <div class="contact-box">
-        <div class="contact-card">
-          <div class="contact-icon">✉️</div>
-          <h3 class="contact-label">Email</h3>
-          <p class="contact-hint">If you'd rather write, this is the place.</p>
+        <div class="contact-card cs-reveal">
+          <div class="contact-icon"><i class="ph-light ph-envelope"></i></div>
+          <h3 class="contact-label" data-i18n="contact.email.label">Email</h3>
+          <p class="contact-hint" data-i18n="contact.email.hint">If you'd rather write, this is the place.</p>
           <a href="mailto:luigi.viggiano@hotmail.it" class="contact-link">luigi.viggiano@hotmail.it</a>
         </div>
-        <div class="contact-card">
-          <div class="contact-icon">📞</div>
-          <h3 class="contact-label">Phone / WhatsApp</h3>
-          <p class="contact-hint">If you'd rather talk it through, give me a call.</p>
+        <div class="contact-card cs-reveal">
+          <div class="contact-icon"><i class="ph-light ph-phone"></i></div>
+          <h3 class="contact-label" data-i18n="contact.phone.label">Phone / WhatsApp</h3>
+          <p class="contact-hint" data-i18n="contact.phone.hint">If you'd rather talk it through, give me a call.</p>
           <a href="tel:+393482681688" class="contact-link">+39 348 268 1688</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-inner">
-      <span class="footer-brand">Luigi Viggiano</span>
-      <span class="footer-copy">© 2026 Luigi Viggiano. All rights reserved.</span>
+    <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand footer-col-1">
+          <a href="index.html" aria-label="Torna alla home" class="footer-logo-link">
+            <span class="footer-logo-text" >LV.</span>
+          </a>
+          <div class="footer-description">
+            <strong>Luigi Viggiano</strong><br>
+            Via Turbolo, 27 | 85040 Viggianello (PZ)<br>
+            C.F.: VGGLGU99S24C002I<br>
+            Email: <a href="mailto:luigi.viggiano@hotmail.it" class="footer-inline-link dynamic-email">luigi.viggiano@hotmail.it</a><br><br>
+            Digital Marketing &amp; UI/UX Designer
+          </div>
+        </div>
+        <div class="footer-col footer-col-2">
+          <h4 data-i18n="footer.explore">ESPLORA</h4>
+          <ul>
+            <li><a href="index.html" data-i18n="footer.home">Home</a></li>
+            <li><a href="index.html#progetti" data-i18n="nav.portfolio">Portfolio</a></li>
+            <li><a href="#competenze" data-i18n="nav.skills">Competenze</a></li>
+            <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+            <li><a href="index.html#contatti" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-3">
+          <h4 data-i18n="footer.contacts">CONTATTI</h4>
+          <ul>
+            <li><a href="https://wa.me/393482681688" target="_blank" rel="noopener noreferrer" class="dynamic-wa-link">WhatsApp</a></li>
+            <li><a href="mailto:luigi.viggiano@hotmail.it" class="dynamic-email">Email</a></li>
+          </ul>
+          
+        
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/luigi-viggiano" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ph-light ph-linkedin-logo"></i></a>
+            <a href="https://www.behance.net/luigiviggiano2" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ph-light ph-behance-logo"></i></a>
+          </div>
+        </div>
+        <div class="footer-col footer-col-4">
+          <h4 data-i18n="footer.legal">LEGALE</h4>
+          <ul>
+            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+            <li><a href="cookie.html" data-i18n="footer.cookie">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <p data-i18n="footer.copy">© 2026 Luigi Viggiano. Tutti i diritti riservati.</p>
+        <p class="footer-legal-text"><span class="dynamic-address">Via Turbolo, 27, 85040 Viggianello (PZ)</span> · Italia</p>
+      </div>
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // case study toggle
-    const panels = { poly: 'case-poly', unblinking: 'case-unblinking', snapyap: 'case-snapyap', deal: 'case-deal', tvtime: 'case-tvtime', foto: 'case-foto', pollino: 'case-pollino', eclissi: 'case-eclissi', tesi: 'case-tesi', signsync: 'case-signsync' };
-
-    let savedScrollY = 0;
-
-    function toggleCase(id) {
-      const panel  = document.getElementById(panels[id]);
-      const isOpen = panel?.classList.contains('open');
-      
-      if (!document.body.classList.contains('panel-open')) {
-        savedScrollY = window.scrollY;
-      }
-      
-      closePanels();
-      
-      if (!isOpen && panel) {
-        document.body.style.top = `-${savedScrollY}px`;
-        panel.classList.add('open');
-        document.body.classList.add('panel-open');
-      }
-    }
-
-    function closePanels() {
-      document.querySelectorAll('.case-study-panel.open').forEach(p => p.classList.remove('open'));
-      document.body.classList.remove('panel-open');
-      document.body.style.top = '';
-      window.scrollTo({ top: savedScrollY, behavior: 'instant' });
-    }
-
-    // jump from the end of one case study straight into the next
-    function goToNextCase(nextId) {
-      closePanels();
-      setTimeout(() => toggleCase(nextId), 280);
-    }
-
-    // close on backdrop click
-    document.addEventListener('click', e => {
-      const panel = e.target instanceof Element && e.target.closest('.case-study-panel.open');
-      if (panel && e.target === panel) closePanels();
-    });
-
-
-    // ── hamburger menu ──────────────────────────────────────────
-    (function() {
-      const btn    = document.getElementById('nav-hamburger-btn');
-      const menu   = document.getElementById('nav-mobile');
-      if (!btn || !menu) return;
-
-      function openMenu() {
-        menu.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        btn.setAttribute('aria-label', 'Close navigation menu');
-        document.body.style.overflow = 'hidden';
-        // focus first link for keyboard accessibility
-        const firstLink = menu.querySelector('a');
-        if (firstLink) firstLink.focus();
-      }
-
-      function closeMenu() {
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.setAttribute('aria-label', 'Open navigation menu');
-        document.body.style.overflow = '';
-        btn.focus(); // return focus to trigger
-      }
-
-      function toggleMenu() {
-        const isOpen = menu.classList.contains('open');
-        isOpen ? closeMenu() : openMenu();
-      }
-
-      btn.addEventListener('click', toggleMenu);
-
-      // close on Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
-      });
-
-      // close when a mobile link is clicked (navigates to section)
-      menu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', closeMenu);
-      });
-
-      // close if viewport grows past breakpoint (e.g. rotating device)
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && menu.classList.contains('open')) closeMenu();
-      });
-    })();
-    // ────────────────────────────────────────────────────────────
-
-
-    // scroll-reveal per case study
-    function initCsReveal(panel) {
-      const els = panel.querySelectorAll('.cs-reveal, .cs-reveal-left, .cs-reveal-right');
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-      }, { root: panel, threshold: 0.12 });
-      els.forEach(el => obs.observe(el));
-    }
-    const _origToggle = toggleCase;
-    window.toggleCase = function(id) {
-      _origToggle(id);
-      setTimeout(() => {
-        const p = document.querySelector('.case-study-panel.open');
-        if (p) { p.scrollTop = 0; initCsReveal(p); }
-      }, 50);
-    };
-
-    // ── slider progetti & filtri ─────────────────────────────
-    (function() {
-      const track  = document.getElementById('projectsTrack');
-      const prev   = document.getElementById('sliderPrev');
-      const next   = document.getElementById('sliderNext');
-      const dotsContainer = document.getElementById('projectsDots');
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      
-      if (!track) return;
-
-      function getCards() { return track.querySelectorAll('.project-card:not(.hidden)'); }
-      function getCardWidth() {
-        const c = getCards()[0];
-        if (!c) return 320;
-        const gap = parseInt(getComputedStyle(track).gap) || 24;
-        return c.offsetWidth + gap;
-      }
-      function currentIndex() {
-        return Math.round(track.scrollLeft / getCardWidth()) || 0;
-      }
-      function goTo(idx) {
-        const cards = getCards();
-        if(!cards.length) return;
-        const clamped = Math.max(0, Math.min(idx, cards.length - 1));
-        track.scrollTo({ left: clamped * getCardWidth(), behavior: 'smooth' });
-      }
-      
-      function renderDots() {
-        const cards = getCards();
-        dotsContainer.innerHTML = '';
-        cards.forEach((_, i) => {
-          const btn = document.createElement('button');
-          btn.className = 'projects-dot' + (i === 0 ? ' active' : '');
-          btn.dataset.index = i;
-          btn.setAttribute('aria-label', 'Project ' + (i + 1));
-          btn.addEventListener('click', () => goTo(i));
-          dotsContainer.appendChild(btn);
-        });
-      }
-      
-      function updateDots() {
-        const idx = currentIndex();
-        const dots = dotsContainer.querySelectorAll('.projects-dot');
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-      }
-      
-      function updateArrows() {
-        const idx = currentIndex();
-        const cards = getCards();
-        if (prev) prev.disabled = idx === 0 || cards.length === 0;
-        if (next) next.disabled = idx >= cards.length - 1 || cards.length === 0;
-      }
-
-      if (prev) prev.addEventListener('click', () => goTo(currentIndex() - 1));
-      if (next) next.addEventListener('click', () => goTo(currentIndex() + 1));
-      track.addEventListener('scroll', () => { updateDots(); updateArrows(); }, { passive: true });
-
-      // Filtering logic
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Update active state
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          
-          const filter = btn.dataset.filter;
-          const allCards = track.querySelectorAll('.project-card');
-          
-          allCards.forEach(c => {
-            if (filter === 'all' || c.dataset.category === filter) {
-              c.classList.remove('hidden');
-            } else {
-              c.classList.add('hidden');
-            }
-          });
-          
-          // Reset scroll
-          track.scrollTo({ left: 0, behavior: 'instant' });
-          
-          // Re-init slider controls
-          renderDots();
-          updateArrows();
-        });
-      });
-
-      // init
-      renderDots();
-      updateArrows();
-    })();
-    // ─────────────────────────────────────────────────────────
-
-    // scroll fade-in for cards and sections
-    const fadeObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.service-card, .contact-card, .about-grid').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity .5s ease, transform .5s ease';
-      fadeObs.observe(el);
-    });
-  </script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/main.js?v=5" defer></script>
 </body>
 </html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV Time Redesign — UI/UX Case Study | Luigi Viggiano</title>
+    <link rel="canonical" href="https://viggiano2411-del.github.io/tv-time.html">
+    <link rel="alternate" hreflang="it" href="https://viggiano2411-del.github.io/tv-time.html">
+    <link rel="alternate" hreflang="en" href="https://viggiano2411-del.github.io/tv-time.html">
+    <link rel="alternate" hreflang="x-default" href="https://viggiano2411-del.github.io/tv-time.html">
+    <meta name="theme-color" content="#0b0a10">
+
+  <meta name="description" content="Full redesign of TV Time with a new anti-spoiler feature, designed following Apple's Human Interface Guidelines.">
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <script src="js/config.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
+
+    <meta property="og:title" content="TV Time Redesign — UI/UX Case Study | Luigi Viggiano">
+    <meta property="og:description" content="Redesigning TV Time with a new anti-spoiler feature built on Apple's Human Interface Guidelines.">
+    <meta property="og:image" content="https://viggiano2411-del.github.io/tv-time/tvtimehero.webp">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://viggiano2411-del.github.io/tv-time.html">
+  <link rel="icon" type="image/webp" href="favicon.webp">
+</head>
+<body>
+  
+  
+  <!-- NAV --><nav>
+    <div class="container nav-inner">
+      <a href="index.html#hero" class="nav-logo">Luigi Viggiano</a>
+
+      <!-- desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#progetti" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="index.html#competenze" data-i18n="nav.skills">Competenze</a></li>
+        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+        <li><a href="index.html#contatti" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <!-- desktop CTA -->
+      <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">IT</button>
+      <a href="index.html#contatti" class="btn btn-primary nav-cta"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
+
+      <!-- hamburger — visible on mobile only -->
+      <button
+        class="nav-hamburger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+        id="nav-hamburger-btn"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- mobile menu overlay -->
+  <div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button id="lang-toggle-mobile" class="lang-toggle" aria-label="Switch language" >IT</button>
+    <a href="index.html#progetti" class="nav-mobile-link" data-i18n="nav.portfolio">Portfolio</a>
+    <a href="index.html#competenze" class="nav-mobile-link" data-i18n="nav.skills">Competenze</a>
+    <a href="index.html#about"    class="nav-mobile-link" data-i18n="nav.about">About</a>
+    <a href="index.html#contatti" class="nav-mobile-link" data-i18n="nav.contact">Contact</a>
+    <div class="nav-mobile-cta">
+      <a href="index.html#contatti" class="btn btn-primary"><span data-i18n="nav.cta">Let's Talk</span> <i class="ph-light ph-arrow-right" ></i></a>
+    </div>
+  </div>
+
+<main class="case-study-page">
+      <div class="case-study-inner">
+        <div class="cs-intro cs-reveal">
+          <div class="cs-intro-text">
+            <div class="cs-label-row"><span class="cs-category" data-i18n="cs.tvtime.category"></span><span class="cs-dot"></span><span class="cs-year" data-i18n="cs.tvtime.year"></span></div>
+          <h1 class="cs-title" data-i18n="cs.tvtime.title"></h1>
+          <p class="cs-subtitle" data-i18n="cs.tvtime.subtitle"></p>
+          <div class="cs-role"><span class="tag" data-i18n="cs.tvtime.tag_0"></span><span class="tag" data-i18n="cs.tvtime.tag_1"></span><span class="tag" data-i18n="cs.tvtime.tag_2"></span><span class="tag" data-i18n="cs.tvtime.tag_3"></span></div>
+          </div>
+          <div class="cs-intro-image">
+            <img src="tv-time/tvtimehero.webp" alt="Hero Image" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.tvtime.eyebrow_0"></p>
+            <h3 class="cs-chapter-label" data-i18n="cs.tvtime.label_0"></h3>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_0" ></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_1"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_2"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_3"></p>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_4" ></p>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="tv-time/tvtimescreen1.webp" alt="TV Time Context" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-chapter-text-full cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.tvtime.eyebrow_1"></p>
+            <h3 class="cs-chapter-label" data-i18n="cs.tvtime.label_1"></h3>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_5"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_6"></p>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_7" ></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_8"></p>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_9" ></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_10"></p>
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.tvtime.eyebrow_2"></p>
+            <h3 class="cs-chapter-label" data-i18n="cs.tvtime.label_2"></h3>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_11"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_12"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_13"></p>
+            <ul class="cs-icon-list">
+              <li><i class="ph-light ph-tree-structure"></i><span data-i18n="cs.tvtime.li_0"></span></li>
+              <li><i class="ph-light ph-compass"></i><span data-i18n="cs.tvtime.li_1"></span></li>
+              <li><i class="ph-light ph-squares-four"></i><span data-i18n="cs.tvtime.li_2"></span></li>
+              <li><i class="ph-light ph-text-aa"></i><span data-i18n="cs.tvtime.li_3"></span></li>
+              <li><i class="ph-light ph-hand-tap"></i><span data-i18n="cs.tvtime.li_4"></span></li>
+              <li><i class="ph-light ph-checks"></i><span data-i18n="cs.tvtime.li_5"></span></li>
+            </ul>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_14"></p>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_15" ></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_16"></p>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="tv-time/tvtimescreen2.webp" alt="TV Time Process" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.tvtime.eyebrow_3"></p>
+            <h3 class="cs-chapter-label" data-i18n="cs.tvtime.label_3"></h3>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_17"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_18"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_19"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_20"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_21"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_22"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_35"></p>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_36" ></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_37"></p>
+          </div>
+          <div class="cs-chapter-visual">
+            <img src="tv-time/tvtimescreen3.webp" alt="TV Time Feature" class="cs-reveal cs-img" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="cs-chapter" class="cs-justify-center">
+          <img src="tv-time/tvtimehero.webp" alt="TV Time Concept" class="cs-reveal cs-img" class="cs-img-full" loading="lazy" />
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-chapter-text-full cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.tvtime.eyebrow_4"></p>
+            <h3 class="cs-chapter-label" data-i18n="cs.tvtime.label_4"></h3>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_23"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_24"></p>
+            <ul class="cs-icon-list">
+              <li><i class="ph-light ph-magnifying-glass"></i><span data-i18n="cs.tvtime.li_6"></span></li>
+              <li><i class="ph-light ph-tree-structure"></i><span data-i18n="cs.tvtime.li_7"></span></li>
+              <li><i class="ph-light ph-flow-arrow"></i><span data-i18n="cs.tvtime.li_8"></span></li>
+              <li><i class="ph-light ph-hand-tap"></i><span data-i18n="cs.tvtime.li_9"></span></li>
+              <li><i class="ph-light ph-layout"></i><span data-i18n="cs.tvtime.li_10"></span></li>
+              <li><i class="ph-light ph-puzzle-piece"></i><span data-i18n="cs.tvtime.li_11"></span></li>
+              <li><i class="ph-light ph-app-store-logo"></i><span data-i18n="cs.tvtime.li_12"></span></li>
+            </ul>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_25"></p>
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-chapter-text-full cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.tvtime.eyebrow_5"></p>
+            <h3 class="cs-chapter-label" data-i18n="cs.tvtime.label_5"></h3>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_26"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_27"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_28"></p>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_29" ></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_30"></p>
+          </div>
+        </div>
+
+        <div class="cs-chapter">
+          <div class="cs-chapter-text cs-chapter-text-full cs-reveal-left">
+            <p class="cs-chapter-eyebrow" data-i18n="cs.tvtime.eyebrow_6"></p>
+            <h3 class="cs-chapter-label" data-i18n="cs.tvtime.label_6"></h3>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_31"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_32"></p>
+            <p class="cs-chapter-body" data-i18n="cs.tvtime.body_33"></p>
+            <p class="cs-chapter-body font-semibold" data-i18n="cs.tvtime.body_34" ></p>
+          </div>
+        </div>
+      </div>
+    </main>
+<script src="js/main.js?v=5" defer></script>
+  <script>
+    // Init scroll reveal immediately since we don't open panels anymore
+    document.addEventListener("DOMContentLoaded", () => {
+      const els = document.querySelectorAll('.cs-reveal, .cs-reveal-left, .cs-reveal-right');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(el => obs.observe(el));
+    });
+  </script>
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand footer-col-1">
+          <a href="index.html" aria-label="Torna alla home" class="footer-logo-link">
+            <span class="footer-logo-text" >LV.</span>
+          </a>
+          <div class="footer-description">
+            <strong>Luigi Viggiano</strong><br>
+            Via Turbolo, 27 | 85040 Viggianello (PZ)<br>
+            C.F.: VGGLGU99S24C002I<br>
+            Email: <a href="mailto:luigi.viggiano@hotmail.it" class="footer-inline-link dynamic-email">luigi.viggiano@hotmail.it</a><br><br>
+            Digital Marketing &amp; UI/UX Designer
+          </div>
+        </div>
+        <div class="footer-col footer-col-2">
+          <h4 data-i18n="footer.explore">ESPLORA</h4>
+          <ul>
+            <li><a href="index.html" data-i18n="footer.home">Home</a></li>
+            <li><a href="index.html#progetti" data-i18n="nav.portfolio">Portfolio</a></li>
+            <li><a href="index.html#competenze" data-i18n="nav.skills">Competenze</a></li>
+            <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+            <li><a href="index.html#contatti" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-3">
+          <h4 data-i18n="footer.contacts">CONTATTI</h4>
+          <ul>
+            <li><a href="https://wa.me/393482681688" target="_blank" rel="noopener noreferrer" class="dynamic-wa-link">WhatsApp</a></li>
+            <li><a href="mailto:luigi.viggiano@hotmail.it" class="dynamic-email">Email</a></li>
+          </ul>
+          
+        
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/luigi-viggiano" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="ph-light ph-linkedin-logo"></i></a>
+            <a href="https://www.behance.net/luigiviggiano2" target="_blank" rel="noopener noreferrer" aria-label="Behance"><i class="ph-light ph-behance-logo"></i></a>
+          </div>
+        </div>
+        <div class="footer-col footer-col-4">
+          <h4 data-i18n="footer.legal">LEGALE</h4>
+          <ul>
+            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+            <li><a href="cookie.html" data-i18n="footer.cookie">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <p data-i18n="footer.copy">© 2026 Luigi Viggiano. Tutti i diritti riservati.</p>
+        <p class="footer-legal-text"><span class="dynamic-address">Via Turbolo, 27, 85040 Viggianello (PZ)</span> · Italia</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
