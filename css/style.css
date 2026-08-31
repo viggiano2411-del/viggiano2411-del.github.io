@@ -1149,6 +1149,7 @@
       .section-desc { max-width: 100%; font-size: 1rem; }
       .section-title { font-size: clamp(2rem, 8vw, 2.6rem); }
 
+      .hero-eyebrow { font-size: 0.6rem; }
       .hero-title { font-size: clamp(2.2rem, 9vw, 2.8rem); word-break: break-word; }
       .hero-sub   { font-size: 1rem; }
       .hero-cta   { flex-direction: column; align-items: stretch; gap: 16px; }
