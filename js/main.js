@@ -240,14 +240,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
 // Magnetic Buttons
-document.querySelectorAll('.btn-primary, .btn-secondary, .magnetic').forEach(btn => {
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    btn.style.transform = `translate(${x * 0.2}px, calc(${y * 0.2}px - 2px))`;
-  });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = ''; // Removes inline style, restores CSS hover
-  });
-});
+

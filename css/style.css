@@ -434,7 +434,7 @@
       -webkit-backdrop-filter: blur(8px);
       user-select: none;
     }
-    .projects-arrow:hover { background: rgba(124,58,237,.5); transform: translateY(-50%) scale(1.08); }
+    .projects-arrow:hover { background: rgba(124,58,237,.5); transform: translateY(-50%); }
     .projects-arrow:disabled { opacity: .25; pointer-events: none; }
     .projects-arrow--prev { left: var(--s3); }
     .projects-arrow--next { right: var(--s3); }
@@ -456,7 +456,7 @@
     .projects-dots {
       display: flex;
       justify-content: center;
-      gap: 6px;
+      gap: 16px;
       margin-top: var(--s5);
     }
     .projects-dot {
@@ -470,7 +470,7 @@
     .projects-dot::after {
       content: '';
       position: absolute;
-      inset: -8px;
+      inset: -16px;
     }
     .projects-dot.active {
       background: var(--accent2);
@@ -513,7 +513,7 @@
       display: block;
       transition: transform .4s ease;
     }
-    .project-card:hover .project-thumb img { transform: scale(1.04); }
+    /* .project-card:hover .project-thumb img { transform: scale(1.04); } */
     .project-thumb::after {
       content: '';
       position: absolute; inset: 0;
@@ -719,7 +719,7 @@
     }
     .contact-card:hover {
       border-color: rgba(168,85,247,.4);
-      transform: translateY(-4px);
+      
     }
     .contact-icon {
       font-size: 2.5rem;
@@ -1059,7 +1059,7 @@
     .footer-socials a:hover {
       background: var(--accent2);
       color: var(--bg);
-      transform: translateY(-2px);
+      
     }
     .footer-bottom-bar {
       border-top: 1px solid var(--border);
@@ -1149,8 +1149,28 @@
       .section-desc { max-width: 100%; font-size: 1rem; }
       .section-title { font-size: clamp(2rem, 8vw, 2.6rem); }
 
-      .hero-eyebrow { font-size: 0.6rem; }
-      .hero-title { font-size: clamp(2.2rem, 9vw, 2.8rem); word-break: break-word; }
+      /* Eyebrow as a modern "Badge/Pill" to reduce visual weight */
+      .hero-eyebrow { 
+        display: inline-block; 
+        font-size: 0.65rem; 
+        letter-spacing: 0; 
+        opacity: 0.8; 
+        border: 1px solid rgba(168,85,247,0.3);
+        border-radius: 20px;
+        padding: 4px 12px;
+        margin-bottom: 24px;
+        background: rgba(124,58,237,0.05);
+      }
+      .hero-eyebrow span.line { display: none; }
+      
+      /* Force name onto two lines and prevent overflow */
+      .hero-title { 
+        font-size: clamp(3rem, 13vw, 4rem); /* Can be bigger now because it wraps! */
+        line-height: 1.05; 
+      }
+      .hero-title span, .hero-title em { 
+        display: block; /* Forces line break between Luigi and Viggiano */
+      }
       .hero-sub   { font-size: 1rem; }
       .hero-cta   { flex-direction: column; align-items: stretch; gap: 16px; }
       .hero-cta .btn { width: 100%; justify-content: center; }
